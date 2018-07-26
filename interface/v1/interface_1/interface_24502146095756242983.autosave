@@ -1,0 +1,296 @@
+/**
+ * Simple Read
+ * 
+ * Read data from the serial port and change the color of a rectangle
+ * when a switch connected to a Wiring or Arduino board is pressed and released.
+ * This example works with the Wiring / Arduino program that follows below.
+ */
+
+import processing.serial.*;
+import interfascia.*;
+
+// -----------------------------------------------------------------------------
+//GUI CONFIG -------------------------------------------------------------------
+GUIController guiCtrl;
+
+IFButton adxl_config_button, scanOn_button, scanOff_button, saveData_button; 
+IFButton bitWheelConfig, bitWheelConfig_button_up, bitWheelConfig_button_down;
+IFButton evi_data_button;
+IFButton amp_disp_mode_button, samp_disp_mode_button;
+int disp_mode;
+// -----------------------------------------------------------------------------
+//SERIAL CONFIG ----------------------------------------------------------------
+Serial myPort;  // Create object from Serial class
+
+int N_scan = 100;
+int scan_size = 119;
+int buffer_size = 119* N_scan;
+int media_in, media_anterior, count_media_in = 0;
+
+String data_evi_str;
+  
+byte data_in[] = new byte[scan_size];      // Data received from the serial port
+int data_in_int[] = new int[scan_size]; 
+int count_data_in = 0;
+
+
+int data_out_size = buffer_size;
+byte data_out[] = new byte[scan_size];
+int count_data_out = 0;
+
+boolean serial_ready;
+int serial_mode;
+
+char EXIT_STATE = '0';
+char START_STATE = '1';
+char STANDBY_STATE = '2';
+char ADXL_CONFIG_STATE = '3';
+char SCANON_STATE = '4';
+char SCANOFF_STATE = '5';
+char SAMPLER_STATE = '6';
+char BITWHELL_CONFIG_DOWN_STATE = '7';
+char BITWHELL_CONFIG_UP_STATE = '8';
+char SCAN_EVIRONMENT_STATE = '9';
+
+  
+void setup() 
+{  
+  // -----------------------------------------------------------------------------
+  size(1300, 470);
+  background(255); 
+  print("Start!\n");
+  textSize(32);
+  
+  // -----------------------------------------------------------------------------
+  //SERIAL CONFIG ----------------------------------------------------------------
+  // I know that the first port in the serial list on my mac
+  // is always my  FTDI adaptor, so I open Serial.list()[0].
+  // On Windows machines, this generally opens COM1.
+  // Open whatever port is the one you're using.
+  
+  //String portName;
+  //char hello='n';
+  //int i = Serial.list().length;
+  
+  //while(true)
+  //{
+  //  if(i==0)
+  //  {
+  //    i = Serial.list().length;
+  //  }
+  //  i--;
+    
+  //  portName = Serial.list()[i];
+  //  print(portName);print("\t");
+    
+  //  myPort = new Serial(this, portName, 38400);
+    
+  //  //myPort.clear();
+  //  delay(1000);
+    
+  //  print("key:");
+   
+  //  hello = char(myPort.read());
+  //  print(hello);print("\t");
+    
+  //  if(hello=='h')
+  //  {
+  //    println("Connected!\n");
+  //    break;
+  //  }
+  //  else
+  //  {
+  //    hello='n';print(hello);
+  //    portName="null";
+  //    myPort.stop();
+  //    print("ERROR!\n");
+  //  }
+  //}
+
+  //myPort = new Serial(this, portName, 57600);
+  myPort = new Serial(this, "COM5", 38400);
+  
+  serial_ready = false;
+  
+  // -----------------------------------------------------------------------------
+  //INTERFASCIA CONFIG -----------------------------------------------------------
+  guiCtrl = new GUIController (this);
+
+  adxl_config_button = new IFButton("ADXL ReConfig", 40, 40, 80, 17);
+  scanOn_button = new IFButton("SCAN ON", 120, 40, 80, 17);
+  scanOff_button = new IFButton("SCAN OFF", 200, 40, 80, 17);
+  saveData_button = new IFButton("SAVE DATA", 280, 40, 80, 17);
+  bitWheelConfig = new IFButton("BW Config", 400, 40, 80, 17);
+  amp_disp_mode_button = new IFButton("Amplitude", 480, 40, 80, 17);
+  samp_disp_mode_button = new IFButton("Amostras", 560, 40, 80, 17);
+  evi_data_button = new IFButton("Environment:", 740, 40, 100, 17);
+   
+  adxl_config_button.addActionListener(this);
+  scanOn_button.addActionListener(this);
+  scanOff_button.addActionListener(this);
+  saveData_button.addActionListener(this); 
+  bitWheelConfig.addActionListener(this);
+  amp_disp_mode_button.addActionListener(this);
+  samp_disp_mode_button.addActionListener(this);
+  evi_data_button.addActionListener(this);
+  
+  guiCtrl.add(adxl_config_button);
+  guiCtrl.add(scanOn_button);
+  guiCtrl.add(scanOff_button);
+  guiCtrl.add(saveData_button);
+  //guiCtrl.add(bitWheelConfig);
+  guiCtrl.add(amp_disp_mode_button);
+  guiCtrl.add(samp_disp_mode_button);
+  guiCtrl.add(evi_data_button);
+  
+  
+  // -----------------------------------------------------------------------------
+  // ISP SERIAL CONFIG -----------------------------------------------------------   
+  myPort.clear();
+  myPort.buffer(scan_size);//Ativar evento de serial
+}
+
+void scan_data_evi()
+{
+  // -----------------------------------------------------------------------------
+  // SCAN EVIRONMENT DATA --------------------------------------------------------  
+  data_in[0]=127;
+  data_in[1]=127;
+  data_in[2]=127;
+  data_in[3]=127;
+  data_in[4]=127;
+  data_in[5]=127;
+  
+  myPort.clear();
+  
+  myPort.buffer(8);
+   
+  while(serial_ready == false)
+  {
+     myPort.write(SCAN_EVIRONMENT_STATE);
+     delay(100);
+     //serial_ready = true;
+  }
+  serial_ready = false;
+  
+  myPort.clear();
+  myPort.buffer(buffer_size);//Ativar evento de serial
+}
+
+void draw_data_evi()
+{
+  // -----------------------------------------------------------------------------
+  // DISP EVIRONMENT DATA --------------------------------------------------------  
+  fill(255, 255, 255);
+  rect(842, 37, 354, 20, 3, 3, 3, 3);
+  
+  fill(0, 152, 203); 
+  textSize(16);
+  
+  text("Humid:", 845, 54);
+  text(data_in[0], 900, 54);
+  text("%", 920, 54);
+  
+  text("Temp:", 955, 54);
+  text(data_in[2], 1005, 54);
+  text("C", 1025, 54);
+  
+  int pressao;
+  pressao = int(data_in[4])|int(data_in[5]<<8)|int(data_in[6]<<16)|int(data_in[7]<<24);
+  text("Press:", 1065, 54);
+  text(pressao, 1115, 54);
+  text("Pa", 1175, 54);
+}
+
+void draw()
+{  
+    if(serial_ready)
+    {      
+      background(255);
+      //plot.defaultDraw();
+      //draw_data_evi();
+      for (int i = 0; i < scan_size; i++)
+      {     
+        data_in_int[i] = int(data_in[i]) + byte(128);
+        data_in_int[i] = data_in_int[i] - 48;
+        
+        textSize(6);
+        fill(0);
+        //text(i, 10*i+18, 270 +(10*(-1*(i%2))) - data_in_int[i], -30);
+        //if(disp_mode==1)
+          text(i, (10.6)*i+18, 265 - data_in_int[i], -30);
+        //else
+          text(data_in_int[i], (10.6)*i+18, 278 - data_in_int[i], -30);
+        
+        fill(255, media_in - media_anterior + 128, media_in);
+        ellipse((10.6)*i+20, 270 - data_in_int[i], 3, 3);
+        
+        //if(i < scan_size)
+        //{
+        //  //data_out[count_data_out*scan_size + i] = data_in[i];//Saída para arquivo
+        //}
+        //else
+        //{
+        //  count_data_out++;   
+        //  data_out = concat(data_out, data_in);        
+        //}  
+      }      
+      
+      count_data_out++;   
+      data_out = concat(data_out, data_in); 
+          
+      fill(0);
+      textSize(12);
+      text("Amplitude: Aceleração: 4 mG/LSB ... Representação: (8 bits) 256 LSB/G", 40, 80);
+      
+      serial_ready = false;
+    }
+    else
+    {     
+      //fill(0, 102, 153); 
+      //text("stand by", 10, 30);
+    }
+}
+
+void serialEvent(Serial p) 
+{
+   data_in = p.readBytes();
+
+   serial_ready = true;     
+     
+   //text("serial read", 450, 30);   
+}
+
+void actionPerformed (GUIEvent e) {
+  if (e.getSource() == adxl_config_button) 
+  {
+    myPort.write(ADXL_CONFIG_STATE);
+  } 
+  else if (e.getSource() == scanOn_button) 
+  {
+    myPort.write(SCANON_STATE);
+  }
+  else if (e.getSource() == scanOff_button) 
+  {
+    myPort.write(SCANOFF_STATE);
+  }
+  else if (e.getSource() == amp_disp_mode_button) 
+  {
+    disp_mode=1;
+  }
+  else if (e.getSource() == samp_disp_mode_button) 
+  {
+    disp_mode=0;
+  }
+  else if (e.getSource() == saveData_button) 
+  {
+    saveBytes("output.dat", data_out);
+  }
+  else if (e.getSource() == evi_data_button) 
+  {
+    myPort.write(SCANOFF_STATE);
+    
+    scan_data_evi(); 
+    draw_data_evi(); 
+  }
+}

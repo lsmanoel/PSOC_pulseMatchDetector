@@ -1,0 +1,237 @@
+%%Aluno: Lucas Seara Manoel
+clear;
+clc;
+
+%% Especificações do filtro
+fs=1000;%Hz frequência de amostragem
+f_c=100;%Hz frequência de corte
+f_c2=1000;%Hz frequência de corte superior para filtro de faixa
+
+%Gabarito
+R_p=-0.2;%dB 
+R_r=-60;%dB 
+fundoDeEscala=-100;%dB 
+
+f_p=0;%Hz 
+f_r=0;%Hz 
+f_r2=0;%Hz //Use f_r2 e f_p2 ao invés de f_r ou f_p para filtros PA e PB
+f_p2=200;%Hz 
+
+w_p=2*pi*f_p;%rad/s
+w_r=2*pi*f_r;%rad/s
+w_p2=2*pi*f_p2;%rad/s
+w_r2=2*pi*f_r2;%rad/s
+
+w_c=2*pi*f_c;%rad/s
+w_c2=2*pi*f_c2;%rad/s
+
+Og_p=w_p/fs;%rad
+Og_r=w_r/fs;%rad
+Og_p2=w_p2/fs;%rad
+Og_r2=w_r2/fs;%rad
+
+Og_c=w_c/fs;%rad frequência limite da banda de passagem (freq. de corte)
+Og_c2=w_c2/fs;
+
+% Parâmetros
+M=2000;%numero de coeficientes... ordem do polinômio
+N=(M-1)/2;
+n=0:M-1;
+
+% Janela:lóbulo principal : Largura da banda de transição : pico de erro
+%w=hamming(M);%4*pi/M : 18*pi/M : 53dB
+%w=hann(M);%8*pi/M : 6.1*pi/M : 44dB      
+w=blackman(M);%4*pi/M : 18*pi/M : 74dB
+%w=triang(M);%4*pi/M : 18*pi/M : 25dB
+%w=rectwin(M);%4*pi/M : 18*pi/M : 21dB
+
+%%Plot w
+% f6 = figure('Color', [1 1 1], 'Unit', 'Centimeters', 'Position', [5, 5, 12, 10]); 
+% a6 = axes('FontName', 'Arial', 'FontSize', 9, 'Position', [0.1508 0.1225 0.8124 0.8245]);
+% stem(n,w, 'Marker', '.');
+% xlabel('Amostras');
+% ylabel('Janela');
+% xlim([0, M-1]);
+
+%% Definição dos coeficientes
+
+h=sin(Og_c*(3-n))/(pi*(2));
+if mod(M,2)%Ajuste de estouro da amostra central.
+    h(N+1)=Og_c/pi;
+end
+
+%passa-baixa ideal
+h=sin(Og_c*(n-N))./(pi*(n-N));
+if mod(M,2)%Ajuste de estouro da amostra central.
+    h(N+1)=Og_c/pi;
+end
+
+%passa-alta ideal
+% h=-sin(Og_c*(n-N))./(pi*(n-N));
+% if mod(M,2)%Ajuste de estouro da amostra central.
+%     h(N+1)=1-Og_c/pi;
+% end
+
+%passa-faixa ideal
+% h=((sin(Og_c*(n-N)))-(sin(Og_c2*(n-N))))./(pi*(n-N));
+% if mod(M,2)%Ajuste de estouro da amostra central.
+%     h(N+1)=(Og_c2-Og_c)/pi;
+% end
+
+%rejeita-faixa ideal
+% h=((sin(Og_c*(n-N)))-(sin(Og_c2*(n-N))))./(pi*(n-N));
+% if mod(M,2)%Ajuste de estouro da amostra central.
+%     h(N+1)=1+(Og_c-Og_c2)/pi;
+% end
+
+
+%%Plot h
+% f7 = figure('Color', [1 1 1], 'Unit', 'Centimeters', 'Position', [5, 5, 12, 10]); 
+% a7 = axes('FontName', 'Arial', 'FontSize', 9, 'Position', [0.1508 0.1225 0.8124 0.8245]);
+% stem(n,h, 'Marker', '.');
+% xlabel('Amostras');
+% ylabel('h(n)(Sem Janelamento)');
+% xlim([0, M-1]);
+
+%%Janelamento
+h=h(:).*w(:);% resposta ao impulso do filtro FIR
+
+%%Plot h janelado
+f8 = figure('Color', [1 1 1], 'Unit', 'Centimeters', 'Position', [5, 5, 12, 10]); 
+a8 = axes('FontName', 'Arial', 'FontSize', 9, 'Position', [0.1508 0.1225 0.8124 0.8245]);
+stem(n,h, 'Marker', '.');
+xlabel('Amostras');
+ylabel('h(n)(Com Janelamento)');
+xlim([0, M-1]);
+
+
+%% Resposta em Frequência
+
+% % Processo: Resposta em frequência do filtro
+NFFT=1024;%número de pontos da FFT
+h_zeros=[h; zeros(NFFT-numel(h),1)];%preenchimento por zero
+H=fft(h_zeros);
+r=0:NFFT-1;%índices das amostras do FFT
+Omg=2*pi*r/NFFT;%eixo de frequência do FFT
+% 
+% % H(1:length(h_zeros))=0.00001;%Para plotar apenas o gabarito
+% 
+% %%Plot H Digital
+f2=figure('Color', [1 1 1], 'Unit', 'Centimeters', 'Position', [6, 6, 12, 10]); 
+a2=axes('FontName', 'Arial', 'FontSize', 9, 'Position', [0.1508 0.1225 0.8124 0.8245]);
+set(f2, 'Color', [1 1 1], 'Unit', 'Centimeters', 'Position', [6, 6, 12, 10]); 
+set(a2, 'FontName', 'Arial', 'FontSize', 9, 'Position', [0.1233 0.1225 0.8398 0.8245]);
+plot(a2, Omg(1:NFFT/2), 20*log10(abs(H(1:NFFT/2))));%dB
+xlabel('Frequência digital (rad)');
+ylabel('|H(\Omega)|');
+xlim([0, pi]);
+hold on;
+
+% % Plot Gabarito com Frequência Digital
+% if(Og_p2>Og_r2)
+%     maxLineAnalog(1:fix((NFFT*Og_r)/(2*pi)))=0;
+%     maxLineAnalog(fix((NFFT*Og_r)/(2*pi))+1:fix((NFFT*Og_r2)/(2*pi))-1)=R_r;
+%     maxLineAnalog(fix((NFFT*Og_r2)/(2*pi)):NFFT/2)=0;
+% 
+%     minLineAnalog(1:fix((NFFT*Og_p)/(2*pi)))=R_p;
+%     minLineAnalog(fix((NFFT*Og_p)/(2*pi))+1:fix((NFFT*Og_p2)/(2*pi))-1)=fundoDeEscala;%min(20*log10(abs(H(1:NFFT/2))));
+%     minLineAnalog(fix((NFFT*Og_p2)/(2*pi)):NFFT/2)=R_p;
+% else
+%     maxLineAnalog(1:fix((NFFT*Og_r)/(2*pi)))=R_r;
+%     maxLineAnalog(fix((NFFT*Og_r)/(2*pi))+1:fix((NFFT*Og_r2)/(2*pi))-1)=0;
+%     maxLineAnalog(fix((NFFT*Og_r2)/(2*pi)):NFFT/2)=R_r;
+% 
+%     minLineAnalog(1:fix((NFFT*Og_p)/(2*pi)))=fundoDeEscala;
+%     minLineAnalog(fix((NFFT*Og_p)/(2*pi))+1:fix((NFFT*Og_p2)/(2*pi))-1)=R_p;
+%     minLineAnalog(fix((NFFT*Og_p2)/(2*pi)):NFFT/2)=fundoDeEscala;%min(20*log10(abs(H(1:NFFT/2))));
+% end
+% 
+% plot(Omg(1:NFFT/2), maxLineAnalog(1:NFFT/2));
+% plot(Omg(1:NFFT/2), minLineAnalog(1:NFFT/2));
+% 
+% %%Plot H Analógico
+% f3=figure('Color', [1 1 1], 'Unit', 'Centimeters', 'Position', [7, 7, 12, 10]); 
+% a3=axes('FontName', 'Arial', 'FontSize', 9, 'Position', [0.1508 0.1225 0.8124 0.8245]);
+% set(f3, 'Color', [1 1 1], 'Unit', 'Centimeters', 'Position', [7, 7, 12, 10]); 
+% set(a3, 'FontName', 'Arial', 'FontSize', 9, 'Position', [0.1233 0.1225 0.8398 0.8245]);
+% % plot(a2, Omg(1:NFFT/2), 20*log10(abs(H(1:NFFT/2))));%dB
+% xlabel('Frequência Analógico (rad/s)');
+% ylabel('|H(\w)|');
+% xlim([0, fs*pi]);
+% hold on;
+% 
+% % Plot Gabarito com Frequência ANALÓGICA
+% if(w_p2>w_r2)
+%     maxLineAnalog(1:fix((NFFT*w_r)/(2*pi*fs)))=0;
+%     maxLineAnalog(fix((NFFT*w_r)/(2*pi*fs))+1:fix((NFFT*w_r2)/(2*pi*fs))-1)=R_r;
+%     maxLineAnalog(fix((NFFT*w_r2)/(2*pi*fs)):NFFT/2)=0;
+% 
+%     minLineAnalog(1:fix((NFFT*w_p)/(2*pi*fs)))=R_p;
+%     minLineAnalog(fix((NFFT*w_p)/(2*pi*fs))+1:fix((NFFT*w_p2)/(2*pi*fs))-1)=fundoDeEscala;
+%     minLineAnalog(fix((NFFT*w_p2)/(2*pi*fs)):NFFT/2)=R_p;
+% else
+%     maxLineAnalog(1:fix((NFFT*w_r)/(2*pi*fs)))=R_r;
+%     maxLineAnalog(fix((NFFT*w_r)/(2*pi*fs))+1:fix((NFFT*w_r2)/(2*pi*fs))-1)=0;
+%     maxLineAnalog(fix((NFFT*w_r2)/(2*pi*fs)):NFFT/2)=R_r;
+% 
+%     minLineAnalog(1:fix((NFFT*w_p)/(2*pi*fs)))=fundoDeEscala;%min(20*log10(abs(H(1:NFFT/2))));
+%     minLineAnalog(fix((NFFT*w_p)/(2*pi*fs))+1:fix((NFFT*w_p2)/(2*pi*fs))-1)=R_p;
+%     minLineAnalog(fix((NFFT*w_p2)/(2*pi*fs)):NFFT/2)=fundoDeEscala;
+% end
+% 
+% plot(fs*Omg(1:NFFT/2), maxLineAnalog(1:NFFT/2));
+% plot(fs*Omg(1:NFFT/2), minLineAnalog(1:NFFT/2));
+
+%% Teste de Desenpenho do FILTRO
+t=linspace(0,1,fs);
+
+fileID = fopen('output_1000_comPeso.dat','r');
+sig_1=fread(fileID);
+plot(sig_1);
+fclose(fileID);
+
+x =sig_1;
+% x =x(45000:50000);
+% x = x(1:fs);
+
+% x = 0.3*chirp(t,0,1,fs/2);
+% x = sin(2*pi*f_c*t/100);
+% x = sin(2*pi*f_c2*t/100);
+% x = wgn(1,fs,0,'real');
+
+y=filter(h,1,x);
+
+f4=figure('Color', [1 1 1], 'Unit', 'Centimeters', 'Position', [8, 8, 36, 10]);
+a4=axes('FontName', 'Arial', 'FontSize', 9, 'Position', [0.1508 0.1225 0.8124 0.8245]);
+set(f4, 'Color', [1 1 1], 'Unit', 'Centimeters', 'Position', [8, 8, 36, 10]); 
+set(a4, 'FontName', 'Arial', 'FontSize', 9, 'Position', [0.1233 0.1225 0.8398 0.8245]);
+plot((0:length(x)-1)/2, x, 'Color', [1 0 0.2]);
+% plot(t, x, 'Color', [1 0 0.2]);
+% xlabel('Frequência Chirp(0:fs/2)(Hz) e Tempo(t)');
+xlabel('Tempo(t)');
+ylabel('|x(t)|');
+xlim([0, fs/2]);
+grid on
+hold on
+plot((0:length(y)-1)/2, y, 'Color', [0 0 1]);
+% plot(t, y, 'Color', [0 0 1]);
+
+%%FFT de y
+% Y=fft(y);
+% f5=figure('Color', [1 1 1], 'Unit', 'Centimeters', 'Position', [9, 9, 12, 10]); 
+% a5=axes('FontName', 'Arial', 'FontSize', 9, 'Position', [0.1508 0.1225 0.8124 0.8245]);
+% set(f5, 'Color', [1 1 1], 'Unit', 'Centimeters', 'Position', [9, 9, 12, 10]); 
+% set(a5, 'FontName', 'Arial', 'FontSize', 9, 'Position', [0.1233 0.1225 0.8398 0.8245]);
+% plot(a5, Omg(1:NFFT/2), 20*log10(abs(Y(1:NFFT/2))));%dB
+% xlabel('Frequência digital (rad)');
+% ylabel('|Y(\Omega)|');
+% xlim([0, pi]);
+% hold on;
+
+%%Resultados Audíveis
+% soundsc(y);
+% soundsc(x);
+
+%% Salva filtro projetado
+% filename = 'filter.h';
+% save(filename, 'h');

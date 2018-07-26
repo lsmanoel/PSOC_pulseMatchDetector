@@ -1,0 +1,1708 @@
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.matchPhotonInterrupt_1,"ax",%progbits
+  20              		.align	2
+  21              		.global	matchPhotonInterrupt_1
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	matchPhotonInterrupt_1, %function
+  25              	matchPhotonInterrupt_1:
+  26              	.LFB63:
+  27              		.file 1 "main.c"
+   1:main.c        **** /* ========================================
+   2:main.c        ****  *
+   3:main.c        ****  * Copyright YOUR COMPANY, THE YEAR
+   4:main.c        ****  * All Rights Reserved
+   5:main.c        ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:main.c        ****  *
+   7:main.c        ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:main.c        ****  * WHICH IS THE PROPERTY OF your company.
+   9:main.c        ****  *
+  10:main.c        ****  * ========================================
+  11:main.c        **** */
+  12:main.c        **** #include "project.h"
+  13:main.c        **** 
+  14:main.c        **** volatile uint8_t samplerInput;
+  15:main.c        **** 
+  16:main.c        **** // -----------------------------------------------------------------------------
+  17:main.c        **** //matchCounterControl_Reg_1
+  18:main.c        **** #define OFF_COMMAND 0
+  19:main.c        **** #define ON_COMMAND 0b00000011  
+  20:main.c        **** #define RESET_COMMAND 0b00000100 
+  21:main.c        **** 
+  22:main.c        **** // -----------------------------------------------------------------------------
+  23:main.c        **** // State Machine ---------------------------------------------------------------
+  24:main.c        **** void exit_state_process();//0
+  25:main.c        **** void start_state_process();//1
+  26:main.c        **** void standby_state_process();//2
+  27:main.c        **** void scanOn_state_process();//3
+  28:main.c        **** void scanOff_state_process();//4
+  29:main.c        **** void sampler_state_process();//5
+  30:main.c        **** void setRegs_state_process();//6
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 2
+
+
+  31:main.c        **** 
+  32:main.c        **** //Estado comum a todas as máquinas de estado:
+  33:main.c        **** #define EXIT_STATE 0
+  34:main.c        **** #define START_STATE 1
+  35:main.c        **** #define STANDBY_STATE 2
+  36:main.c        **** #define SCANON_STATE 3
+  37:main.c        **** #define SCANOFF_STATE 4
+  38:main.c        **** #define SAMPLER_STATE 5
+  39:main.c        **** #define SETREGS_STATE 6
+  40:main.c        **** 
+  41:main.c        **** void (*main_state_table[])()=
+  42:main.c        **** {
+  43:main.c        ****     exit_state_process,//0
+  44:main.c        ****     start_state_process,//1
+  45:main.c        ****     standby_state_process,//2
+  46:main.c        ****     scanOn_state_process,//3
+  47:main.c        ****     scanOff_state_process,//4
+  48:main.c        ****     sampler_state_process,//5
+  49:main.c        ****     setRegs_state_process//6
+  50:main.c        **** };
+  51:main.c        **** 
+  52:main.c        **** volatile int main_state;
+  53:main.c        **** 
+  54:main.c        **** CY_ISR(matchPhotonInterrupt_1)
+  55:main.c        **** {	
+  28              		.loc 1 55 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  56:main.c        ****     main_state =  SAMPLER_STATE;
+  33              		.loc 1 56 0
+  34 0000 0522     		movs	r2, #5
+  35 0002 014B     		ldr	r3, .L2
+  36 0004 1A60     		str	r2, [r3]
+  37 0006 7047     		bx	lr
+  38              	.L3:
+  39              		.align	2
+  40              	.L2:
+  41 0008 00000000 		.word	main_state
+  42              		.cfi_endproc
+  43              	.LFE63:
+  44              		.size	matchPhotonInterrupt_1, .-matchPhotonInterrupt_1
+  45              		.section	.text.standby_state_process,"ax",%progbits
+  46              		.align	2
+  47              		.global	standby_state_process
+  48              		.thumb
+  49              		.thumb_func
+  50              		.type	standby_state_process, %function
+  51              	standby_state_process:
+  52              	.LFB68:
+  57:main.c        ****     //isr_matchPhoton_1_ClearPending();
+  58:main.c        **** }
+  59:main.c        **** 
+  60:main.c        **** CY_ISR(RxInterrupt_1)
+  61:main.c        **** {	
+  62:main.c        ****     main_state = UART_1_GetChar()-48;
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 3
+
+
+  63:main.c        **** }
+  64:main.c        **** 
+  65:main.c        **** int main(void)
+  66:main.c        **** {
+  67:main.c        ****     CyGlobalIntEnable; /* Enable global interrupts. */
+  68:main.c        **** 
+  69:main.c        ****     UART_1_Start();
+  70:main.c        ****     
+  71:main.c        ****     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
+  72:main.c        ****     
+  73:main.c        ****     isr_Rx_1_StartEx(RxInterrupt_1);
+  74:main.c        ****     isr_matchPhoton_1_StartEx(matchPhotonInterrupt_1);
+  75:main.c        ****     isr_matchPhoton_1_Disable();
+  76:main.c        ****     samplerInput = 0;
+  77:main.c        ****     matchCounterControl_Reg_1_Write(0x00);
+  78:main.c        ****     
+  79:main.c        ****     PWM_1_Start();
+  80:main.c        ****     
+  81:main.c        ****     while(1)
+  82:main.c        ****     {
+  83:main.c        ****         main_state = START_STATE;
+  84:main.c        ****         while(main_state)
+  85:main.c        ****         {       
+  86:main.c        ****             main_state_table[main_state]();
+  87:main.c        ****         }
+  88:main.c        ****     }
+  89:main.c        **** }
+  90:main.c        **** 
+  91:main.c        **** //        if(samplerInput)
+  92:main.c        **** //        {          
+  93:main.c        **** //            UART_1_PutChar((char)(samplerInput+48));
+  94:main.c        **** //            UART_1_PutChar('\n');
+  95:main.c        **** //            samplerInput = 0;
+  96:main.c        **** //        }
+  97:main.c        **** /* [] END OF FILE */
+  98:main.c        **** 
+  99:main.c        **** void exit_state_process()//0
+ 100:main.c        **** {
+ 101:main.c        ****     matchCounterControl_Reg_1_Write(0x00);
+ 102:main.c        ****     isr_matchPhoton_1_Disable();
+ 103:main.c        **** }
+ 104:main.c        **** 
+ 105:main.c        **** void start_state_process()//1
+ 106:main.c        **** {
+ 107:main.c        ****     
+ 108:main.c        ****     main_state = STANDBY_STATE;
+ 109:main.c        ****     count_th_Reg_1_Write(255);
+ 110:main.c        **** }
+ 111:main.c        **** 
+ 112:main.c        **** void standby_state_process()//2
+ 113:main.c        **** {
+  53              		.loc 1 113 0
+  54              		.cfi_startproc
+  55              		@ args = 0, pretend = 0, frame = 0
+  56              		@ frame_needed = 0, uses_anonymous_args = 0
+  57              		@ link register save eliminated.
+  58 0000 7047     		bx	lr
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 4
+
+
+  59              		.cfi_endproc
+  60              	.LFE68:
+  61              		.size	standby_state_process, .-standby_state_process
+  62 0002 00BF     		.section	.text.RxInterrupt_1,"ax",%progbits
+  63              		.align	2
+  64              		.global	RxInterrupt_1
+  65              		.thumb
+  66              		.thumb_func
+  67              		.type	RxInterrupt_1, %function
+  68              	RxInterrupt_1:
+  69              	.LFB64:
+  61:main.c        ****     main_state = UART_1_GetChar()-48;
+  70              		.loc 1 61 0
+  71              		.cfi_startproc
+  72              		@ args = 0, pretend = 0, frame = 0
+  73              		@ frame_needed = 0, uses_anonymous_args = 0
+  61:main.c        ****     main_state = UART_1_GetChar()-48;
+  74              		.loc 1 61 0
+  75 0000 08B5     		push	{r3, lr}
+  76              		.cfi_def_cfa_offset 8
+  77              		.cfi_offset 3, -8
+  78              		.cfi_offset 14, -4
+  62:main.c        **** }
+  79              		.loc 1 62 0
+  80 0002 FFF7FEFF 		bl	UART_1_GetChar
+  81              	.LVL0:
+  82 0006 3038     		subs	r0, r0, #48
+  83 0008 014B     		ldr	r3, .L7
+  84 000a 1860     		str	r0, [r3]
+  85 000c 08BD     		pop	{r3, pc}
+  86              	.L8:
+  87 000e 00BF     		.align	2
+  88              	.L7:
+  89 0010 00000000 		.word	main_state
+  90              		.cfi_endproc
+  91              	.LFE64:
+  92              		.size	RxInterrupt_1, .-RxInterrupt_1
+  93              		.section	.text.exit_state_process,"ax",%progbits
+  94              		.align	2
+  95              		.global	exit_state_process
+  96              		.thumb
+  97              		.thumb_func
+  98              		.type	exit_state_process, %function
+  99              	exit_state_process:
+ 100              	.LFB66:
+ 100:main.c        ****     matchCounterControl_Reg_1_Write(0x00);
+ 101              		.loc 1 100 0
+ 102              		.cfi_startproc
+ 103              		@ args = 0, pretend = 0, frame = 0
+ 104              		@ frame_needed = 0, uses_anonymous_args = 0
+ 105 0000 08B5     		push	{r3, lr}
+ 106              		.cfi_def_cfa_offset 8
+ 107              		.cfi_offset 3, -8
+ 108              		.cfi_offset 14, -4
+ 101:main.c        ****     isr_matchPhoton_1_Disable();
+ 109              		.loc 1 101 0
+ 110 0002 0020     		movs	r0, #0
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 5
+
+
+ 111 0004 FFF7FEFF 		bl	matchCounterControl_Reg_1_Write
+ 112              	.LVL1:
+ 102:main.c        **** }
+ 113              		.loc 1 102 0
+ 114 0008 FFF7FEFF 		bl	isr_matchPhoton_1_Disable
+ 115              	.LVL2:
+ 116 000c 08BD     		pop	{r3, pc}
+ 117              		.cfi_endproc
+ 118              	.LFE66:
+ 119              		.size	exit_state_process, .-exit_state_process
+ 120 000e 00BF     		.section	.text.scanOff_state_process,"ax",%progbits
+ 121              		.align	2
+ 122              		.global	scanOff_state_process
+ 123              		.thumb
+ 124              		.thumb_func
+ 125              		.type	scanOff_state_process, %function
+ 126              	scanOff_state_process:
+ 127              	.LFB70:
+ 114:main.c        ****     
+ 115:main.c        **** }
+ 116:main.c        **** 
+ 117:main.c        **** void scanOn_state_process()//4
+ 118:main.c        **** {
+ 119:main.c        ****     main_state = STANDBY_STATE;
+ 120:main.c        ****     isr_matchPhoton_1_Enable();
+ 121:main.c        ****     matchCounterControl_Reg_1_Write(RESET_COMMAND);
+ 122:main.c        ****     matchCounterControl_Reg_1_Write(ON_COMMAND);
+ 123:main.c        **** }
+ 124:main.c        **** 
+ 125:main.c        **** void scanOff_state_process()//5
+ 126:main.c        **** {
+ 128              		.loc 1 126 0
+ 129              		.cfi_startproc
+ 130              		@ args = 0, pretend = 0, frame = 0
+ 131              		@ frame_needed = 0, uses_anonymous_args = 0
+ 132 0000 08B5     		push	{r3, lr}
+ 133              		.cfi_def_cfa_offset 8
+ 134              		.cfi_offset 3, -8
+ 135              		.cfi_offset 14, -4
+ 127:main.c        ****     main_state = STANDBY_STATE;
+ 136              		.loc 1 127 0
+ 137 0002 0222     		movs	r2, #2
+ 138 0004 034B     		ldr	r3, .L13
+ 139 0006 1A60     		str	r2, [r3]
+ 128:main.c        ****     isr_matchPhoton_1_Disable();
+ 140              		.loc 1 128 0
+ 141 0008 FFF7FEFF 		bl	isr_matchPhoton_1_Disable
+ 142              	.LVL3:
+ 129:main.c        ****     matchCounterControl_Reg_1_Write(OFF_COMMAND);
+ 143              		.loc 1 129 0
+ 144 000c 0020     		movs	r0, #0
+ 145 000e FFF7FEFF 		bl	matchCounterControl_Reg_1_Write
+ 146              	.LVL4:
+ 147 0012 08BD     		pop	{r3, pc}
+ 148              	.L14:
+ 149              		.align	2
+ 150              	.L13:
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 6
+
+
+ 151 0014 00000000 		.word	main_state
+ 152              		.cfi_endproc
+ 153              	.LFE70:
+ 154              		.size	scanOff_state_process, .-scanOff_state_process
+ 155              		.section	.text.start_state_process,"ax",%progbits
+ 156              		.align	2
+ 157              		.global	start_state_process
+ 158              		.thumb
+ 159              		.thumb_func
+ 160              		.type	start_state_process, %function
+ 161              	start_state_process:
+ 162              	.LFB67:
+ 106:main.c        ****     
+ 163              		.loc 1 106 0
+ 164              		.cfi_startproc
+ 165              		@ args = 0, pretend = 0, frame = 0
+ 166              		@ frame_needed = 0, uses_anonymous_args = 0
+ 167 0000 08B5     		push	{r3, lr}
+ 168              		.cfi_def_cfa_offset 8
+ 169              		.cfi_offset 3, -8
+ 170              		.cfi_offset 14, -4
+ 108:main.c        ****     count_th_Reg_1_Write(255);
+ 171              		.loc 1 108 0
+ 172 0002 0222     		movs	r2, #2
+ 173 0004 024B     		ldr	r3, .L17
+ 174 0006 1A60     		str	r2, [r3]
+ 109:main.c        **** }
+ 175              		.loc 1 109 0
+ 176 0008 FF20     		movs	r0, #255
+ 177 000a FFF7FEFF 		bl	count_th_Reg_1_Write
+ 178              	.LVL5:
+ 179 000e 08BD     		pop	{r3, pc}
+ 180              	.L18:
+ 181              		.align	2
+ 182              	.L17:
+ 183 0010 00000000 		.word	main_state
+ 184              		.cfi_endproc
+ 185              	.LFE67:
+ 186              		.size	start_state_process, .-start_state_process
+ 187              		.section	.text.setRegs_state_process,"ax",%progbits
+ 188              		.align	2
+ 189              		.global	setRegs_state_process
+ 190              		.thumb
+ 191              		.thumb_func
+ 192              		.type	setRegs_state_process, %function
+ 193              	setRegs_state_process:
+ 194              	.LFB72:
+ 130:main.c        **** }
+ 131:main.c        **** 
+ 132:main.c        **** void sampler_state_process()//5
+ 133:main.c        **** {
+ 134:main.c        ****     main_state = STANDBY_STATE;
+ 135:main.c        ****     samplerInput = NMatch_Reg_1_Read() - 128;
+ 136:main.c        ****     UART_1_WriteTxData(samplerInput);
+ 137:main.c        ****     //UART_1_PutChar((char)(samplerInput));
+ 138:main.c        **** }
+ 139:main.c        **** 
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 7
+
+
+ 140:main.c        **** void setRegs_state_process()//6
+ 141:main.c        **** {
+ 195              		.loc 1 141 0
+ 196              		.cfi_startproc
+ 197              		@ args = 0, pretend = 0, frame = 0
+ 198              		@ frame_needed = 0, uses_anonymous_args = 0
+ 199              	.L20:
+ 142:main.c        ****     while(main_state==SETREGS_STATE){}
+ 200              		.loc 1 142 0 discriminator 1
+ 201 0000 064B     		ldr	r3, .L22
+ 202 0002 1B68     		ldr	r3, [r3]
+ 203 0004 062B     		cmp	r3, #6
+ 204 0006 FBD0     		beq	.L20
+ 141:main.c        ****     while(main_state==SETREGS_STATE){}
+ 205              		.loc 1 141 0
+ 206 0008 10B5     		push	{r4, lr}
+ 207              		.cfi_def_cfa_offset 8
+ 208              		.cfi_offset 4, -8
+ 209              		.cfi_offset 14, -4
+ 143:main.c        ****     count_th_Reg_1_Write(main_state+47);
+ 210              		.loc 1 143 0
+ 211 000a 044C     		ldr	r4, .L22
+ 212 000c 2068     		ldr	r0, [r4]
+ 213 000e 2F30     		adds	r0, r0, #47
+ 214 0010 C0B2     		uxtb	r0, r0
+ 215 0012 FFF7FEFF 		bl	count_th_Reg_1_Write
+ 216              	.LVL6:
+ 144:main.c        ****     main_state = STANDBY_STATE;    
+ 217              		.loc 1 144 0
+ 218 0016 0223     		movs	r3, #2
+ 219 0018 2360     		str	r3, [r4]
+ 220 001a 10BD     		pop	{r4, pc}
+ 221              	.L23:
+ 222              		.align	2
+ 223              	.L22:
+ 224 001c 00000000 		.word	main_state
+ 225              		.cfi_endproc
+ 226              	.LFE72:
+ 227              		.size	setRegs_state_process, .-setRegs_state_process
+ 228              		.section	.text.scanOn_state_process,"ax",%progbits
+ 229              		.align	2
+ 230              		.global	scanOn_state_process
+ 231              		.thumb
+ 232              		.thumb_func
+ 233              		.type	scanOn_state_process, %function
+ 234              	scanOn_state_process:
+ 235              	.LFB69:
+ 118:main.c        ****     main_state = STANDBY_STATE;
+ 236              		.loc 1 118 0
+ 237              		.cfi_startproc
+ 238              		@ args = 0, pretend = 0, frame = 0
+ 239              		@ frame_needed = 0, uses_anonymous_args = 0
+ 240 0000 08B5     		push	{r3, lr}
+ 241              		.cfi_def_cfa_offset 8
+ 242              		.cfi_offset 3, -8
+ 243              		.cfi_offset 14, -4
+ 119:main.c        ****     isr_matchPhoton_1_Enable();
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 8
+
+
+ 244              		.loc 1 119 0
+ 245 0002 0222     		movs	r2, #2
+ 246 0004 054B     		ldr	r3, .L26
+ 247 0006 1A60     		str	r2, [r3]
+ 120:main.c        ****     matchCounterControl_Reg_1_Write(RESET_COMMAND);
+ 248              		.loc 1 120 0
+ 249 0008 FFF7FEFF 		bl	isr_matchPhoton_1_Enable
+ 250              	.LVL7:
+ 121:main.c        ****     matchCounterControl_Reg_1_Write(ON_COMMAND);
+ 251              		.loc 1 121 0
+ 252 000c 0420     		movs	r0, #4
+ 253 000e FFF7FEFF 		bl	matchCounterControl_Reg_1_Write
+ 254              	.LVL8:
+ 122:main.c        **** }
+ 255              		.loc 1 122 0
+ 256 0012 0320     		movs	r0, #3
+ 257 0014 FFF7FEFF 		bl	matchCounterControl_Reg_1_Write
+ 258              	.LVL9:
+ 259 0018 08BD     		pop	{r3, pc}
+ 260              	.L27:
+ 261 001a 00BF     		.align	2
+ 262              	.L26:
+ 263 001c 00000000 		.word	main_state
+ 264              		.cfi_endproc
+ 265              	.LFE69:
+ 266              		.size	scanOn_state_process, .-scanOn_state_process
+ 267              		.section	.text.sampler_state_process,"ax",%progbits
+ 268              		.align	2
+ 269              		.global	sampler_state_process
+ 270              		.thumb
+ 271              		.thumb_func
+ 272              		.type	sampler_state_process, %function
+ 273              	sampler_state_process:
+ 274              	.LFB71:
+ 133:main.c        ****     main_state = STANDBY_STATE;
+ 275              		.loc 1 133 0
+ 276              		.cfi_startproc
+ 277              		@ args = 0, pretend = 0, frame = 0
+ 278              		@ frame_needed = 0, uses_anonymous_args = 0
+ 279 0000 08B5     		push	{r3, lr}
+ 280              		.cfi_def_cfa_offset 8
+ 281              		.cfi_offset 3, -8
+ 282              		.cfi_offset 14, -4
+ 134:main.c        ****     samplerInput = NMatch_Reg_1_Read() - 128;
+ 283              		.loc 1 134 0
+ 284 0002 0222     		movs	r2, #2
+ 285 0004 054B     		ldr	r3, .L30
+ 286 0006 1A60     		str	r2, [r3]
+ 135:main.c        ****     UART_1_WriteTxData(samplerInput);
+ 287              		.loc 1 135 0
+ 288 0008 FFF7FEFF 		bl	NMatch_Reg_1_Read
+ 289              	.LVL10:
+ 290 000c 8038     		subs	r0, r0, #128
+ 291 000e C0B2     		uxtb	r0, r0
+ 292 0010 034B     		ldr	r3, .L30+4
+ 293 0012 1870     		strb	r0, [r3]
+ 136:main.c        ****     //UART_1_PutChar((char)(samplerInput));
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 9
+
+
+ 294              		.loc 1 136 0
+ 295 0014 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 296 0016 FFF7FEFF 		bl	UART_1_WriteTxData
+ 297              	.LVL11:
+ 298 001a 08BD     		pop	{r3, pc}
+ 299              	.L31:
+ 300              		.align	2
+ 301              	.L30:
+ 302 001c 00000000 		.word	main_state
+ 303 0020 00000000 		.word	samplerInput
+ 304              		.cfi_endproc
+ 305              	.LFE71:
+ 306              		.size	sampler_state_process, .-sampler_state_process
+ 307              		.section	.text.main,"ax",%progbits
+ 308              		.align	2
+ 309              		.global	main
+ 310              		.thumb
+ 311              		.thumb_func
+ 312              		.type	main, %function
+ 313              	main:
+ 314              	.LFB65:
+  66:main.c        ****     CyGlobalIntEnable; /* Enable global interrupts. */
+ 315              		.loc 1 66 0
+ 316              		.cfi_startproc
+ 317              		@ Volatile: function does not return.
+ 318              		@ args = 0, pretend = 0, frame = 0
+ 319              		@ frame_needed = 0, uses_anonymous_args = 0
+ 320 0000 08B5     		push	{r3, lr}
+ 321              		.cfi_def_cfa_offset 8
+ 322              		.cfi_offset 3, -8
+ 323              		.cfi_offset 14, -4
+  67:main.c        **** 
+ 324              		.loc 1 67 0
+ 325              		.syntax unified
+ 326              	@ 67 "main.c" 1
+ 327 0002 62B6     		CPSIE   i
+ 328              	@ 0 "" 2
+  69:main.c        ****     
+ 329              		.loc 1 69 0
+ 330              		.thumb
+ 331              		.syntax unified
+ 332 0004 FFF7FEFF 		bl	UART_1_Start
+ 333              	.LVL12:
+  73:main.c        ****     isr_matchPhoton_1_StartEx(matchPhotonInterrupt_1);
+ 334              		.loc 1 73 0
+ 335 0008 0E48     		ldr	r0, .L37
+ 336 000a FFF7FEFF 		bl	isr_Rx_1_StartEx
+ 337              	.LVL13:
+  74:main.c        ****     isr_matchPhoton_1_Disable();
+ 338              		.loc 1 74 0
+ 339 000e 0E48     		ldr	r0, .L37+4
+ 340 0010 FFF7FEFF 		bl	isr_matchPhoton_1_StartEx
+ 341              	.LVL14:
+  75:main.c        ****     samplerInput = 0;
+ 342              		.loc 1 75 0
+ 343 0014 FFF7FEFF 		bl	isr_matchPhoton_1_Disable
+ 344              	.LVL15:
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 10
+
+
+  76:main.c        ****     matchCounterControl_Reg_1_Write(0x00);
+ 345              		.loc 1 76 0
+ 346 0018 0020     		movs	r0, #0
+ 347 001a 0C4B     		ldr	r3, .L37+8
+ 348 001c 1870     		strb	r0, [r3]
+  77:main.c        ****     
+ 349              		.loc 1 77 0
+ 350 001e FFF7FEFF 		bl	matchCounterControl_Reg_1_Write
+ 351              	.LVL16:
+  79:main.c        ****     
+ 352              		.loc 1 79 0
+ 353 0022 FFF7FEFF 		bl	PWM_1_Start
+ 354              	.LVL17:
+ 355              	.L35:
+  83:main.c        ****         while(main_state)
+ 356              		.loc 1 83 0
+ 357 0026 0122     		movs	r2, #1
+ 358 0028 094B     		ldr	r3, .L37+12
+ 359 002a 1A60     		str	r2, [r3]
+  84:main.c        ****         {       
+ 360              		.loc 1 84 0
+ 361 002c 05E0     		b	.L33
+ 362              	.L34:
+  86:main.c        ****         }
+ 363              		.loc 1 86 0
+ 364 002e 084B     		ldr	r3, .L37+12
+ 365 0030 1A68     		ldr	r2, [r3]
+ 366 0032 084B     		ldr	r3, .L37+16
+ 367 0034 53F82230 		ldr	r3, [r3, r2, lsl #2]
+ 368 0038 9847     		blx	r3
+ 369              	.LVL18:
+ 370              	.L33:
+  84:main.c        ****         {       
+ 371              		.loc 1 84 0
+ 372 003a 054B     		ldr	r3, .L37+12
+ 373 003c 1B68     		ldr	r3, [r3]
+ 374 003e 002B     		cmp	r3, #0
+ 375 0040 F5D1     		bne	.L34
+ 376 0042 F0E7     		b	.L35
+ 377              	.L38:
+ 378              		.align	2
+ 379              	.L37:
+ 380 0044 00000000 		.word	RxInterrupt_1
+ 381 0048 00000000 		.word	matchPhotonInterrupt_1
+ 382 004c 00000000 		.word	samplerInput
+ 383 0050 00000000 		.word	main_state
+ 384 0054 00000000 		.word	.LANCHOR0
+ 385              		.cfi_endproc
+ 386              	.LFE65:
+ 387              		.size	main, .-main
+ 388              		.comm	main_state,4,4
+ 389              		.global	main_state_table
+ 390              		.comm	samplerInput,1,1
+ 391              		.data
+ 392              		.align	2
+ 393              		.set	.LANCHOR0,. + 0
+ 394              		.type	main_state_table, %object
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 11
+
+
+ 395              		.size	main_state_table, 28
+ 396              	main_state_table:
+ 397 0000 00000000 		.word	exit_state_process
+ 398 0004 00000000 		.word	start_state_process
+ 399 0008 00000000 		.word	standby_state_process
+ 400 000c 00000000 		.word	scanOn_state_process
+ 401 0010 00000000 		.word	scanOff_state_process
+ 402 0014 00000000 		.word	sampler_state_process
+ 403 0018 00000000 		.word	setRegs_state_process
+ 404              		.text
+ 405              	.Letext0:
+ 406              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 407              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 408              		.file 4 "Generated_Source\\PSoC5/core_cm3.h"
+ 409              		.file 5 "Generated_Source\\PSoC5/UART_1.h"
+ 410              		.file 6 "Generated_Source\\PSoC5/matchCounterControl_Reg_1.h"
+ 411              		.file 7 "Generated_Source\\PSoC5/isr_matchPhoton_1.h"
+ 412              		.file 8 "Generated_Source\\PSoC5/count_th_Reg_1.h"
+ 413              		.file 9 "Generated_Source\\PSoC5/NMatch_Reg_1.h"
+ 414              		.file 10 "Generated_Source\\PSoC5/isr_Rx_1.h"
+ 415              		.file 11 "Generated_Source\\PSoC5/PWM_1.h"
+ 416              		.section	.debug_info,"",%progbits
+ 417              	.Ldebug_info0:
+ 418 0000 60030000 		.4byte	0x360
+ 419 0004 0400     		.2byte	0x4
+ 420 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 421 000a 04       		.byte	0x4
+ 422 000b 01       		.uleb128 0x1
+ 423 000c A1000000 		.4byte	.LASF39
+ 424 0010 0C       		.byte	0xc
+ 425 0011 46030000 		.4byte	.LASF40
+ 426 0015 2F020000 		.4byte	.LASF41
+ 427 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 428 001d 00000000 		.4byte	0
+ 429 0021 00000000 		.4byte	.Ldebug_line0
+ 430 0025 02       		.uleb128 0x2
+ 431 0026 01       		.byte	0x1
+ 432 0027 06       		.byte	0x6
+ 433 0028 87030000 		.4byte	.LASF0
+ 434 002c 03       		.uleb128 0x3
+ 435 002d 24000000 		.4byte	.LASF4
+ 436 0031 02       		.byte	0x2
+ 437 0032 1D       		.byte	0x1d
+ 438 0033 37000000 		.4byte	0x37
+ 439 0037 02       		.uleb128 0x2
+ 440 0038 01       		.byte	0x1
+ 441 0039 08       		.byte	0x8
+ 442 003a 93000000 		.4byte	.LASF1
+ 443 003e 02       		.uleb128 0x2
+ 444 003f 02       		.byte	0x2
+ 445 0040 05       		.byte	0x5
+ 446 0041 68030000 		.4byte	.LASF2
+ 447 0045 02       		.uleb128 0x2
+ 448 0046 02       		.byte	0x2
+ 449 0047 07       		.byte	0x7
+ 450 0048 59000000 		.4byte	.LASF3
+ 451 004c 03       		.uleb128 0x3
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 12
+
+
+ 452 004d 4F000000 		.4byte	.LASF5
+ 453 0051 02       		.byte	0x2
+ 454 0052 3F       		.byte	0x3f
+ 455 0053 57000000 		.4byte	0x57
+ 456 0057 02       		.uleb128 0x2
+ 457 0058 04       		.byte	0x4
+ 458 0059 05       		.byte	0x5
+ 459 005a 72030000 		.4byte	.LASF6
+ 460 005e 02       		.uleb128 0x2
+ 461 005f 04       		.byte	0x4
+ 462 0060 07       		.byte	0x7
+ 463 0061 B8010000 		.4byte	.LASF7
+ 464 0065 02       		.uleb128 0x2
+ 465 0066 08       		.byte	0x8
+ 466 0067 05       		.byte	0x5
+ 467 0068 38030000 		.4byte	.LASF8
+ 468 006c 02       		.uleb128 0x2
+ 469 006d 08       		.byte	0x8
+ 470 006e 07       		.byte	0x7
+ 471 006f B3020000 		.4byte	.LASF9
+ 472 0073 04       		.uleb128 0x4
+ 473 0074 04       		.byte	0x4
+ 474 0075 05       		.byte	0x5
+ 475 0076 696E7400 		.ascii	"int\000"
+ 476 007a 02       		.uleb128 0x2
+ 477 007b 04       		.byte	0x4
+ 478 007c 07       		.byte	0x7
+ 479 007d 22020000 		.4byte	.LASF10
+ 480 0081 03       		.uleb128 0x3
+ 481 0082 CA020000 		.4byte	.LASF11
+ 482 0086 03       		.byte	0x3
+ 483 0087 18       		.byte	0x18
+ 484 0088 2C000000 		.4byte	0x2c
+ 485 008c 03       		.uleb128 0x3
+ 486 008d 85000000 		.4byte	.LASF12
+ 487 0091 03       		.byte	0x3
+ 488 0092 2C       		.byte	0x2c
+ 489 0093 4C000000 		.4byte	0x4c
+ 490 0097 02       		.uleb128 0x2
+ 491 0098 04       		.byte	0x4
+ 492 0099 04       		.byte	0x4
+ 493 009a 8D000000 		.4byte	.LASF13
+ 494 009e 02       		.uleb128 0x2
+ 495 009f 08       		.byte	0x8
+ 496 00a0 04       		.byte	0x4
+ 497 00a1 7E000000 		.4byte	.LASF14
+ 498 00a5 02       		.uleb128 0x2
+ 499 00a6 01       		.byte	0x1
+ 500 00a7 08       		.byte	0x8
+ 501 00a8 4D030000 		.4byte	.LASF15
+ 502 00ac 02       		.uleb128 0x2
+ 503 00ad 08       		.byte	0x8
+ 504 00ae 04       		.byte	0x4
+ 505 00af 7B030000 		.4byte	.LASF16
+ 506 00b3 02       		.uleb128 0x2
+ 507 00b4 04       		.byte	0x4
+ 508 00b5 07       		.byte	0x7
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 13
+
+
+ 509 00b6 15030000 		.4byte	.LASF17
+ 510 00ba 05       		.uleb128 0x5
+ 511 00bb 81000000 		.4byte	0x81
+ 512 00bf 06       		.uleb128 0x6
+ 513 00c0 00000000 		.4byte	.LASF42
+ 514 00c4 01       		.byte	0x1
+ 515 00c5 36       		.byte	0x36
+ 516 00c6 00000000 		.4byte	.LFB63
+ 517 00ca 0C000000 		.4byte	.LFE63-.LFB63
+ 518 00ce 01       		.uleb128 0x1
+ 519 00cf 9C       		.byte	0x9c
+ 520 00d0 07       		.uleb128 0x7
+ 521 00d1 52030000 		.4byte	.LASF43
+ 522 00d5 01       		.byte	0x1
+ 523 00d6 70       		.byte	0x70
+ 524 00d7 00000000 		.4byte	.LFB68
+ 525 00db 02000000 		.4byte	.LFE68-.LFB68
+ 526 00df 01       		.uleb128 0x1
+ 527 00e0 9C       		.byte	0x9c
+ 528 00e1 08       		.uleb128 0x8
+ 529 00e2 74010000 		.4byte	.LASF44
+ 530 00e6 01       		.byte	0x1
+ 531 00e7 3C       		.byte	0x3c
+ 532 00e8 00000000 		.4byte	.LFB64
+ 533 00ec 14000000 		.4byte	.LFE64-.LFB64
+ 534 00f0 01       		.uleb128 0x1
+ 535 00f1 9C       		.byte	0x9c
+ 536 00f2 00010000 		.4byte	0x100
+ 537 00f6 09       		.uleb128 0x9
+ 538 00f7 06000000 		.4byte	.LVL0
+ 539 00fb EA020000 		.4byte	0x2ea
+ 540 00ff 00       		.byte	0
+ 541 0100 0A       		.uleb128 0xa
+ 542 0101 8F010000 		.4byte	.LASF18
+ 543 0105 01       		.byte	0x1
+ 544 0106 63       		.byte	0x63
+ 545 0107 00000000 		.4byte	.LFB66
+ 546 010b 0E000000 		.4byte	.LFE66-.LFB66
+ 547 010f 01       		.uleb128 0x1
+ 548 0110 9C       		.byte	0x9c
+ 549 0111 32010000 		.4byte	0x132
+ 550 0115 0B       		.uleb128 0xb
+ 551 0116 08000000 		.4byte	.LVL1
+ 552 011a F5020000 		.4byte	0x2f5
+ 553 011e 28010000 		.4byte	0x128
+ 554 0122 0C       		.uleb128 0xc
+ 555 0123 01       		.uleb128 0x1
+ 556 0124 50       		.byte	0x50
+ 557 0125 01       		.uleb128 0x1
+ 558 0126 30       		.byte	0x30
+ 559 0127 00       		.byte	0
+ 560 0128 09       		.uleb128 0x9
+ 561 0129 0C000000 		.4byte	.LVL2
+ 562 012d 00030000 		.4byte	0x300
+ 563 0131 00       		.byte	0
+ 564 0132 0A       		.uleb128 0xa
+ 565 0133 A2010000 		.4byte	.LASF19
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 14
+
+
+ 566 0137 01       		.byte	0x1
+ 567 0138 7D       		.byte	0x7d
+ 568 0139 00000000 		.4byte	.LFB70
+ 569 013d 18000000 		.4byte	.LFE70-.LFB70
+ 570 0141 01       		.uleb128 0x1
+ 571 0142 9C       		.byte	0x9c
+ 572 0143 60010000 		.4byte	0x160
+ 573 0147 09       		.uleb128 0x9
+ 574 0148 0C000000 		.4byte	.LVL3
+ 575 014c 00030000 		.4byte	0x300
+ 576 0150 0D       		.uleb128 0xd
+ 577 0151 12000000 		.4byte	.LVL4
+ 578 0155 F5020000 		.4byte	0x2f5
+ 579 0159 0C       		.uleb128 0xc
+ 580 015a 01       		.uleb128 0x1
+ 581 015b 50       		.byte	0x50
+ 582 015c 01       		.uleb128 0x1
+ 583 015d 30       		.byte	0x30
+ 584 015e 00       		.byte	0
+ 585 015f 00       		.byte	0
+ 586 0160 0A       		.uleb128 0xa
+ 587 0161 A8030000 		.4byte	.LASF20
+ 588 0165 01       		.byte	0x1
+ 589 0166 69       		.byte	0x69
+ 590 0167 00000000 		.4byte	.LFB67
+ 591 016b 14000000 		.4byte	.LFE67-.LFB67
+ 592 016f 01       		.uleb128 0x1
+ 593 0170 9C       		.byte	0x9c
+ 594 0171 86010000 		.4byte	0x186
+ 595 0175 0D       		.uleb128 0xd
+ 596 0176 0E000000 		.4byte	.LVL5
+ 597 017a 0B030000 		.4byte	0x30b
+ 598 017e 0C       		.uleb128 0xc
+ 599 017f 01       		.uleb128 0x1
+ 600 0180 50       		.byte	0x50
+ 601 0181 02       		.uleb128 0x2
+ 602 0182 09       		.byte	0x9
+ 603 0183 FF       		.byte	0xff
+ 604 0184 00       		.byte	0
+ 605 0185 00       		.byte	0
+ 606 0186 0A       		.uleb128 0xa
+ 607 0187 D2020000 		.4byte	.LASF21
+ 608 018b 01       		.byte	0x1
+ 609 018c 8C       		.byte	0x8c
+ 610 018d 00000000 		.4byte	.LFB72
+ 611 0191 20000000 		.4byte	.LFE72-.LFB72
+ 612 0195 01       		.uleb128 0x1
+ 613 0196 9C       		.byte	0x9c
+ 614 0197 A5010000 		.4byte	0x1a5
+ 615 019b 09       		.uleb128 0x9
+ 616 019c 16000000 		.4byte	.LVL6
+ 617 01a0 0B030000 		.4byte	0x30b
+ 618 01a4 00       		.byte	0
+ 619 01a5 0A       		.uleb128 0xa
+ 620 01a6 5F010000 		.4byte	.LASF22
+ 621 01aa 01       		.byte	0x1
+ 622 01ab 75       		.byte	0x75
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 15
+
+
+ 623 01ac 00000000 		.4byte	.LFB69
+ 624 01b0 20000000 		.4byte	.LFE69-.LFB69
+ 625 01b4 01       		.uleb128 0x1
+ 626 01b5 9C       		.byte	0x9c
+ 627 01b6 E6010000 		.4byte	0x1e6
+ 628 01ba 09       		.uleb128 0x9
+ 629 01bb 0C000000 		.4byte	.LVL7
+ 630 01bf 16030000 		.4byte	0x316
+ 631 01c3 0B       		.uleb128 0xb
+ 632 01c4 12000000 		.4byte	.LVL8
+ 633 01c8 F5020000 		.4byte	0x2f5
+ 634 01cc D6010000 		.4byte	0x1d6
+ 635 01d0 0C       		.uleb128 0xc
+ 636 01d1 01       		.uleb128 0x1
+ 637 01d2 50       		.byte	0x50
+ 638 01d3 01       		.uleb128 0x1
+ 639 01d4 34       		.byte	0x34
+ 640 01d5 00       		.byte	0
+ 641 01d6 0D       		.uleb128 0xd
+ 642 01d7 18000000 		.4byte	.LVL9
+ 643 01db F5020000 		.4byte	0x2f5
+ 644 01df 0C       		.uleb128 0xc
+ 645 01e0 01       		.uleb128 0x1
+ 646 01e1 50       		.byte	0x50
+ 647 01e2 01       		.uleb128 0x1
+ 648 01e3 33       		.byte	0x33
+ 649 01e4 00       		.byte	0
+ 650 01e5 00       		.byte	0
+ 651 01e6 0A       		.uleb128 0xa
+ 652 01e7 2E000000 		.4byte	.LASF23
+ 653 01eb 01       		.byte	0x1
+ 654 01ec 84       		.byte	0x84
+ 655 01ed 00000000 		.4byte	.LFB71
+ 656 01f1 24000000 		.4byte	.LFE71-.LFB71
+ 657 01f5 01       		.uleb128 0x1
+ 658 01f6 9C       		.byte	0x9c
+ 659 01f7 0E020000 		.4byte	0x20e
+ 660 01fb 09       		.uleb128 0x9
+ 661 01fc 0C000000 		.4byte	.LVL10
+ 662 0200 21030000 		.4byte	0x321
+ 663 0204 09       		.uleb128 0x9
+ 664 0205 1A000000 		.4byte	.LVL11
+ 665 0209 2C030000 		.4byte	0x32c
+ 666 020d 00       		.byte	0
+ 667 020e 0E       		.uleb128 0xe
+ 668 020f EA010000 		.4byte	.LASF45
+ 669 0213 01       		.byte	0x1
+ 670 0214 41       		.byte	0x41
+ 671 0215 73000000 		.4byte	0x73
+ 672 0219 00000000 		.4byte	.LFB65
+ 673 021d 58000000 		.4byte	.LFE65-.LFB65
+ 674 0221 01       		.uleb128 0x1
+ 675 0222 9C       		.byte	0x9c
+ 676 0223 84020000 		.4byte	0x284
+ 677 0227 09       		.uleb128 0x9
+ 678 0228 08000000 		.4byte	.LVL12
+ 679 022c 37030000 		.4byte	0x337
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 16
+
+
+ 680 0230 0B       		.uleb128 0xb
+ 681 0231 0E000000 		.4byte	.LVL13
+ 682 0235 42030000 		.4byte	0x342
+ 683 0239 47020000 		.4byte	0x247
+ 684 023d 0C       		.uleb128 0xc
+ 685 023e 01       		.uleb128 0x1
+ 686 023f 50       		.byte	0x50
+ 687 0240 05       		.uleb128 0x5
+ 688 0241 03       		.byte	0x3
+ 689 0242 00000000 		.4byte	RxInterrupt_1
+ 690 0246 00       		.byte	0
+ 691 0247 0B       		.uleb128 0xb
+ 692 0248 14000000 		.4byte	.LVL14
+ 693 024c 4D030000 		.4byte	0x34d
+ 694 0250 5E020000 		.4byte	0x25e
+ 695 0254 0C       		.uleb128 0xc
+ 696 0255 01       		.uleb128 0x1
+ 697 0256 50       		.byte	0x50
+ 698 0257 05       		.uleb128 0x5
+ 699 0258 03       		.byte	0x3
+ 700 0259 00000000 		.4byte	matchPhotonInterrupt_1
+ 701 025d 00       		.byte	0
+ 702 025e 09       		.uleb128 0x9
+ 703 025f 18000000 		.4byte	.LVL15
+ 704 0263 00030000 		.4byte	0x300
+ 705 0267 0B       		.uleb128 0xb
+ 706 0268 22000000 		.4byte	.LVL16
+ 707 026c F5020000 		.4byte	0x2f5
+ 708 0270 7A020000 		.4byte	0x27a
+ 709 0274 0C       		.uleb128 0xc
+ 710 0275 01       		.uleb128 0x1
+ 711 0276 50       		.byte	0x50
+ 712 0277 01       		.uleb128 0x1
+ 713 0278 30       		.byte	0x30
+ 714 0279 00       		.byte	0
+ 715 027a 09       		.uleb128 0x9
+ 716 027b 26000000 		.4byte	.LVL17
+ 717 027f 58030000 		.4byte	0x358
+ 718 0283 00       		.byte	0
+ 719 0284 0F       		.uleb128 0xf
+ 720 0285 82010000 		.4byte	.LASF24
+ 721 0289 04       		.byte	0x4
+ 722 028a 1207     		.2byte	0x712
+ 723 028c 90020000 		.4byte	0x290
+ 724 0290 05       		.uleb128 0x5
+ 725 0291 8C000000 		.4byte	0x8c
+ 726 0295 10       		.uleb128 0x10
+ 727 0296 08030000 		.4byte	.LASF25
+ 728 029a 01       		.byte	0x1
+ 729 029b 0E       		.byte	0xe
+ 730 029c BA000000 		.4byte	0xba
+ 731 02a0 05       		.uleb128 0x5
+ 732 02a1 03       		.byte	0x3
+ 733 02a2 00000000 		.4byte	samplerInput
+ 734 02a6 11       		.uleb128 0x11
+ 735 02a7 B6020000 		.4byte	0x2b6
+ 736 02ab B6020000 		.4byte	0x2b6
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 17
+
+
+ 737 02af 12       		.uleb128 0x12
+ 738 02b0 B3000000 		.4byte	0xb3
+ 739 02b4 06       		.byte	0x6
+ 740 02b5 00       		.byte	0
+ 741 02b6 13       		.uleb128 0x13
+ 742 02b7 04       		.byte	0x4
+ 743 02b8 BC020000 		.4byte	0x2bc
+ 744 02bc 14       		.uleb128 0x14
+ 745 02bd C3020000 		.4byte	0x2c3
+ 746 02c1 15       		.uleb128 0x15
+ 747 02c2 00       		.byte	0
+ 748 02c3 10       		.uleb128 0x10
+ 749 02c4 E8020000 		.4byte	.LASF26
+ 750 02c8 01       		.byte	0x1
+ 751 02c9 29       		.byte	0x29
+ 752 02ca A6020000 		.4byte	0x2a6
+ 753 02ce 05       		.uleb128 0x5
+ 754 02cf 03       		.byte	0x3
+ 755 02d0 00000000 		.4byte	main_state_table
+ 756 02d4 10       		.uleb128 0x10
+ 757 02d5 44000000 		.4byte	.LASF27
+ 758 02d9 01       		.byte	0x1
+ 759 02da 34       		.byte	0x34
+ 760 02db E5020000 		.4byte	0x2e5
+ 761 02df 05       		.uleb128 0x5
+ 762 02e0 03       		.byte	0x3
+ 763 02e1 00000000 		.4byte	main_state
+ 764 02e5 05       		.uleb128 0x5
+ 765 02e6 73000000 		.4byte	0x73
+ 766 02ea 16       		.uleb128 0x16
+ 767 02eb F9020000 		.4byte	.LASF28
+ 768 02ef F9020000 		.4byte	.LASF28
+ 769 02f3 05       		.byte	0x5
+ 770 02f4 71       		.byte	0x71
+ 771 02f5 16       		.uleb128 0x16
+ 772 02f6 CA010000 		.4byte	.LASF29
+ 773 02fa CA010000 		.4byte	.LASF29
+ 774 02fe 06       		.byte	0x6
+ 775 02ff 2F       		.byte	0x2f
+ 776 0300 16       		.uleb128 0x16
+ 777 0301 1E030000 		.4byte	.LASF30
+ 778 0305 1E030000 		.4byte	.LASF30
+ 779 0309 07       		.byte	0x7
+ 780 030a 25       		.byte	0x25
+ 781 030b 16       		.uleb128 0x16
+ 782 030c 93030000 		.4byte	.LASF31
+ 783 0310 93030000 		.4byte	.LASF31
+ 784 0314 08       		.byte	0x8
+ 785 0315 2F       		.byte	0x2f
+ 786 0316 16       		.uleb128 0x16
+ 787 0317 EF010000 		.4byte	.LASF32
+ 788 031b EF010000 		.4byte	.LASF32
+ 789 031f 07       		.byte	0x7
+ 790 0320 23       		.byte	0x23
+ 791 0321 16       		.uleb128 0x16
+ 792 0322 6C000000 		.4byte	.LASF33
+ 793 0326 6C000000 		.4byte	.LASF33
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 18
+
+
+ 794 032a 09       		.byte	0x9
+ 795 032b 30       		.byte	0x30
+ 796 032c 16       		.uleb128 0x16
+ 797 032d 2F010000 		.4byte	.LASF34
+ 798 0331 2F010000 		.4byte	.LASF34
+ 799 0335 05       		.byte	0x5
+ 800 0336 88       		.byte	0x88
+ 801 0337 16       		.uleb128 0x16
+ 802 0338 17000000 		.4byte	.LASF35
+ 803 033c 17000000 		.4byte	.LASF35
+ 804 0340 05       		.byte	0x5
+ 805 0341 54       		.byte	0x54
+ 806 0342 16       		.uleb128 0x16
+ 807 0343 42010000 		.4byte	.LASF36
+ 808 0347 42010000 		.4byte	.LASF36
+ 809 034b 0A       		.byte	0xa
+ 810 034c 18       		.byte	0x18
+ 811 034d 16       		.uleb128 0x16
+ 812 034e 08020000 		.4byte	.LASF37
+ 813 0352 08020000 		.4byte	.LASF37
+ 814 0356 07       		.byte	0x7
+ 815 0357 18       		.byte	0x18
+ 816 0358 16       		.uleb128 0x16
+ 817 0359 53010000 		.4byte	.LASF38
+ 818 035d 53010000 		.4byte	.LASF38
+ 819 0361 0B       		.byte	0xb
+ 820 0362 92       		.byte	0x92
+ 821 0363 00       		.byte	0
+ 822              		.section	.debug_abbrev,"",%progbits
+ 823              	.Ldebug_abbrev0:
+ 824 0000 01       		.uleb128 0x1
+ 825 0001 11       		.uleb128 0x11
+ 826 0002 01       		.byte	0x1
+ 827 0003 25       		.uleb128 0x25
+ 828 0004 0E       		.uleb128 0xe
+ 829 0005 13       		.uleb128 0x13
+ 830 0006 0B       		.uleb128 0xb
+ 831 0007 03       		.uleb128 0x3
+ 832 0008 0E       		.uleb128 0xe
+ 833 0009 1B       		.uleb128 0x1b
+ 834 000a 0E       		.uleb128 0xe
+ 835 000b 55       		.uleb128 0x55
+ 836 000c 17       		.uleb128 0x17
+ 837 000d 11       		.uleb128 0x11
+ 838 000e 01       		.uleb128 0x1
+ 839 000f 10       		.uleb128 0x10
+ 840 0010 17       		.uleb128 0x17
+ 841 0011 00       		.byte	0
+ 842 0012 00       		.byte	0
+ 843 0013 02       		.uleb128 0x2
+ 844 0014 24       		.uleb128 0x24
+ 845 0015 00       		.byte	0
+ 846 0016 0B       		.uleb128 0xb
+ 847 0017 0B       		.uleb128 0xb
+ 848 0018 3E       		.uleb128 0x3e
+ 849 0019 0B       		.uleb128 0xb
+ 850 001a 03       		.uleb128 0x3
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 19
+
+
+ 851 001b 0E       		.uleb128 0xe
+ 852 001c 00       		.byte	0
+ 853 001d 00       		.byte	0
+ 854 001e 03       		.uleb128 0x3
+ 855 001f 16       		.uleb128 0x16
+ 856 0020 00       		.byte	0
+ 857 0021 03       		.uleb128 0x3
+ 858 0022 0E       		.uleb128 0xe
+ 859 0023 3A       		.uleb128 0x3a
+ 860 0024 0B       		.uleb128 0xb
+ 861 0025 3B       		.uleb128 0x3b
+ 862 0026 0B       		.uleb128 0xb
+ 863 0027 49       		.uleb128 0x49
+ 864 0028 13       		.uleb128 0x13
+ 865 0029 00       		.byte	0
+ 866 002a 00       		.byte	0
+ 867 002b 04       		.uleb128 0x4
+ 868 002c 24       		.uleb128 0x24
+ 869 002d 00       		.byte	0
+ 870 002e 0B       		.uleb128 0xb
+ 871 002f 0B       		.uleb128 0xb
+ 872 0030 3E       		.uleb128 0x3e
+ 873 0031 0B       		.uleb128 0xb
+ 874 0032 03       		.uleb128 0x3
+ 875 0033 08       		.uleb128 0x8
+ 876 0034 00       		.byte	0
+ 877 0035 00       		.byte	0
+ 878 0036 05       		.uleb128 0x5
+ 879 0037 35       		.uleb128 0x35
+ 880 0038 00       		.byte	0
+ 881 0039 49       		.uleb128 0x49
+ 882 003a 13       		.uleb128 0x13
+ 883 003b 00       		.byte	0
+ 884 003c 00       		.byte	0
+ 885 003d 06       		.uleb128 0x6
+ 886 003e 2E       		.uleb128 0x2e
+ 887 003f 00       		.byte	0
+ 888 0040 3F       		.uleb128 0x3f
+ 889 0041 19       		.uleb128 0x19
+ 890 0042 03       		.uleb128 0x3
+ 891 0043 0E       		.uleb128 0xe
+ 892 0044 3A       		.uleb128 0x3a
+ 893 0045 0B       		.uleb128 0xb
+ 894 0046 3B       		.uleb128 0x3b
+ 895 0047 0B       		.uleb128 0xb
+ 896 0048 27       		.uleb128 0x27
+ 897 0049 19       		.uleb128 0x19
+ 898 004a 11       		.uleb128 0x11
+ 899 004b 01       		.uleb128 0x1
+ 900 004c 12       		.uleb128 0x12
+ 901 004d 06       		.uleb128 0x6
+ 902 004e 40       		.uleb128 0x40
+ 903 004f 18       		.uleb128 0x18
+ 904 0050 9742     		.uleb128 0x2117
+ 905 0052 19       		.uleb128 0x19
+ 906 0053 00       		.byte	0
+ 907 0054 00       		.byte	0
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 20
+
+
+ 908 0055 07       		.uleb128 0x7
+ 909 0056 2E       		.uleb128 0x2e
+ 910 0057 00       		.byte	0
+ 911 0058 3F       		.uleb128 0x3f
+ 912 0059 19       		.uleb128 0x19
+ 913 005a 03       		.uleb128 0x3
+ 914 005b 0E       		.uleb128 0xe
+ 915 005c 3A       		.uleb128 0x3a
+ 916 005d 0B       		.uleb128 0xb
+ 917 005e 3B       		.uleb128 0x3b
+ 918 005f 0B       		.uleb128 0xb
+ 919 0060 11       		.uleb128 0x11
+ 920 0061 01       		.uleb128 0x1
+ 921 0062 12       		.uleb128 0x12
+ 922 0063 06       		.uleb128 0x6
+ 923 0064 40       		.uleb128 0x40
+ 924 0065 18       		.uleb128 0x18
+ 925 0066 9742     		.uleb128 0x2117
+ 926 0068 19       		.uleb128 0x19
+ 927 0069 00       		.byte	0
+ 928 006a 00       		.byte	0
+ 929 006b 08       		.uleb128 0x8
+ 930 006c 2E       		.uleb128 0x2e
+ 931 006d 01       		.byte	0x1
+ 932 006e 3F       		.uleb128 0x3f
+ 933 006f 19       		.uleb128 0x19
+ 934 0070 03       		.uleb128 0x3
+ 935 0071 0E       		.uleb128 0xe
+ 936 0072 3A       		.uleb128 0x3a
+ 937 0073 0B       		.uleb128 0xb
+ 938 0074 3B       		.uleb128 0x3b
+ 939 0075 0B       		.uleb128 0xb
+ 940 0076 27       		.uleb128 0x27
+ 941 0077 19       		.uleb128 0x19
+ 942 0078 11       		.uleb128 0x11
+ 943 0079 01       		.uleb128 0x1
+ 944 007a 12       		.uleb128 0x12
+ 945 007b 06       		.uleb128 0x6
+ 946 007c 40       		.uleb128 0x40
+ 947 007d 18       		.uleb128 0x18
+ 948 007e 9742     		.uleb128 0x2117
+ 949 0080 19       		.uleb128 0x19
+ 950 0081 01       		.uleb128 0x1
+ 951 0082 13       		.uleb128 0x13
+ 952 0083 00       		.byte	0
+ 953 0084 00       		.byte	0
+ 954 0085 09       		.uleb128 0x9
+ 955 0086 898201   		.uleb128 0x4109
+ 956 0089 00       		.byte	0
+ 957 008a 11       		.uleb128 0x11
+ 958 008b 01       		.uleb128 0x1
+ 959 008c 31       		.uleb128 0x31
+ 960 008d 13       		.uleb128 0x13
+ 961 008e 00       		.byte	0
+ 962 008f 00       		.byte	0
+ 963 0090 0A       		.uleb128 0xa
+ 964 0091 2E       		.uleb128 0x2e
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 21
+
+
+ 965 0092 01       		.byte	0x1
+ 966 0093 3F       		.uleb128 0x3f
+ 967 0094 19       		.uleb128 0x19
+ 968 0095 03       		.uleb128 0x3
+ 969 0096 0E       		.uleb128 0xe
+ 970 0097 3A       		.uleb128 0x3a
+ 971 0098 0B       		.uleb128 0xb
+ 972 0099 3B       		.uleb128 0x3b
+ 973 009a 0B       		.uleb128 0xb
+ 974 009b 11       		.uleb128 0x11
+ 975 009c 01       		.uleb128 0x1
+ 976 009d 12       		.uleb128 0x12
+ 977 009e 06       		.uleb128 0x6
+ 978 009f 40       		.uleb128 0x40
+ 979 00a0 18       		.uleb128 0x18
+ 980 00a1 9742     		.uleb128 0x2117
+ 981 00a3 19       		.uleb128 0x19
+ 982 00a4 01       		.uleb128 0x1
+ 983 00a5 13       		.uleb128 0x13
+ 984 00a6 00       		.byte	0
+ 985 00a7 00       		.byte	0
+ 986 00a8 0B       		.uleb128 0xb
+ 987 00a9 898201   		.uleb128 0x4109
+ 988 00ac 01       		.byte	0x1
+ 989 00ad 11       		.uleb128 0x11
+ 990 00ae 01       		.uleb128 0x1
+ 991 00af 31       		.uleb128 0x31
+ 992 00b0 13       		.uleb128 0x13
+ 993 00b1 01       		.uleb128 0x1
+ 994 00b2 13       		.uleb128 0x13
+ 995 00b3 00       		.byte	0
+ 996 00b4 00       		.byte	0
+ 997 00b5 0C       		.uleb128 0xc
+ 998 00b6 8A8201   		.uleb128 0x410a
+ 999 00b9 00       		.byte	0
+ 1000 00ba 02       		.uleb128 0x2
+ 1001 00bb 18       		.uleb128 0x18
+ 1002 00bc 9142     		.uleb128 0x2111
+ 1003 00be 18       		.uleb128 0x18
+ 1004 00bf 00       		.byte	0
+ 1005 00c0 00       		.byte	0
+ 1006 00c1 0D       		.uleb128 0xd
+ 1007 00c2 898201   		.uleb128 0x4109
+ 1008 00c5 01       		.byte	0x1
+ 1009 00c6 11       		.uleb128 0x11
+ 1010 00c7 01       		.uleb128 0x1
+ 1011 00c8 31       		.uleb128 0x31
+ 1012 00c9 13       		.uleb128 0x13
+ 1013 00ca 00       		.byte	0
+ 1014 00cb 00       		.byte	0
+ 1015 00cc 0E       		.uleb128 0xe
+ 1016 00cd 2E       		.uleb128 0x2e
+ 1017 00ce 01       		.byte	0x1
+ 1018 00cf 3F       		.uleb128 0x3f
+ 1019 00d0 19       		.uleb128 0x19
+ 1020 00d1 03       		.uleb128 0x3
+ 1021 00d2 0E       		.uleb128 0xe
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 22
+
+
+ 1022 00d3 3A       		.uleb128 0x3a
+ 1023 00d4 0B       		.uleb128 0xb
+ 1024 00d5 3B       		.uleb128 0x3b
+ 1025 00d6 0B       		.uleb128 0xb
+ 1026 00d7 27       		.uleb128 0x27
+ 1027 00d8 19       		.uleb128 0x19
+ 1028 00d9 49       		.uleb128 0x49
+ 1029 00da 13       		.uleb128 0x13
+ 1030 00db 8701     		.uleb128 0x87
+ 1031 00dd 19       		.uleb128 0x19
+ 1032 00de 11       		.uleb128 0x11
+ 1033 00df 01       		.uleb128 0x1
+ 1034 00e0 12       		.uleb128 0x12
+ 1035 00e1 06       		.uleb128 0x6
+ 1036 00e2 40       		.uleb128 0x40
+ 1037 00e3 18       		.uleb128 0x18
+ 1038 00e4 9642     		.uleb128 0x2116
+ 1039 00e6 19       		.uleb128 0x19
+ 1040 00e7 01       		.uleb128 0x1
+ 1041 00e8 13       		.uleb128 0x13
+ 1042 00e9 00       		.byte	0
+ 1043 00ea 00       		.byte	0
+ 1044 00eb 0F       		.uleb128 0xf
+ 1045 00ec 34       		.uleb128 0x34
+ 1046 00ed 00       		.byte	0
+ 1047 00ee 03       		.uleb128 0x3
+ 1048 00ef 0E       		.uleb128 0xe
+ 1049 00f0 3A       		.uleb128 0x3a
+ 1050 00f1 0B       		.uleb128 0xb
+ 1051 00f2 3B       		.uleb128 0x3b
+ 1052 00f3 05       		.uleb128 0x5
+ 1053 00f4 49       		.uleb128 0x49
+ 1054 00f5 13       		.uleb128 0x13
+ 1055 00f6 3F       		.uleb128 0x3f
+ 1056 00f7 19       		.uleb128 0x19
+ 1057 00f8 3C       		.uleb128 0x3c
+ 1058 00f9 19       		.uleb128 0x19
+ 1059 00fa 00       		.byte	0
+ 1060 00fb 00       		.byte	0
+ 1061 00fc 10       		.uleb128 0x10
+ 1062 00fd 34       		.uleb128 0x34
+ 1063 00fe 00       		.byte	0
+ 1064 00ff 03       		.uleb128 0x3
+ 1065 0100 0E       		.uleb128 0xe
+ 1066 0101 3A       		.uleb128 0x3a
+ 1067 0102 0B       		.uleb128 0xb
+ 1068 0103 3B       		.uleb128 0x3b
+ 1069 0104 0B       		.uleb128 0xb
+ 1070 0105 49       		.uleb128 0x49
+ 1071 0106 13       		.uleb128 0x13
+ 1072 0107 3F       		.uleb128 0x3f
+ 1073 0108 19       		.uleb128 0x19
+ 1074 0109 02       		.uleb128 0x2
+ 1075 010a 18       		.uleb128 0x18
+ 1076 010b 00       		.byte	0
+ 1077 010c 00       		.byte	0
+ 1078 010d 11       		.uleb128 0x11
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 23
+
+
+ 1079 010e 01       		.uleb128 0x1
+ 1080 010f 01       		.byte	0x1
+ 1081 0110 49       		.uleb128 0x49
+ 1082 0111 13       		.uleb128 0x13
+ 1083 0112 01       		.uleb128 0x1
+ 1084 0113 13       		.uleb128 0x13
+ 1085 0114 00       		.byte	0
+ 1086 0115 00       		.byte	0
+ 1087 0116 12       		.uleb128 0x12
+ 1088 0117 21       		.uleb128 0x21
+ 1089 0118 00       		.byte	0
+ 1090 0119 49       		.uleb128 0x49
+ 1091 011a 13       		.uleb128 0x13
+ 1092 011b 2F       		.uleb128 0x2f
+ 1093 011c 0B       		.uleb128 0xb
+ 1094 011d 00       		.byte	0
+ 1095 011e 00       		.byte	0
+ 1096 011f 13       		.uleb128 0x13
+ 1097 0120 0F       		.uleb128 0xf
+ 1098 0121 00       		.byte	0
+ 1099 0122 0B       		.uleb128 0xb
+ 1100 0123 0B       		.uleb128 0xb
+ 1101 0124 49       		.uleb128 0x49
+ 1102 0125 13       		.uleb128 0x13
+ 1103 0126 00       		.byte	0
+ 1104 0127 00       		.byte	0
+ 1105 0128 14       		.uleb128 0x14
+ 1106 0129 15       		.uleb128 0x15
+ 1107 012a 01       		.byte	0x1
+ 1108 012b 01       		.uleb128 0x1
+ 1109 012c 13       		.uleb128 0x13
+ 1110 012d 00       		.byte	0
+ 1111 012e 00       		.byte	0
+ 1112 012f 15       		.uleb128 0x15
+ 1113 0130 18       		.uleb128 0x18
+ 1114 0131 00       		.byte	0
+ 1115 0132 00       		.byte	0
+ 1116 0133 00       		.byte	0
+ 1117 0134 16       		.uleb128 0x16
+ 1118 0135 2E       		.uleb128 0x2e
+ 1119 0136 00       		.byte	0
+ 1120 0137 3F       		.uleb128 0x3f
+ 1121 0138 19       		.uleb128 0x19
+ 1122 0139 3C       		.uleb128 0x3c
+ 1123 013a 19       		.uleb128 0x19
+ 1124 013b 6E       		.uleb128 0x6e
+ 1125 013c 0E       		.uleb128 0xe
+ 1126 013d 03       		.uleb128 0x3
+ 1127 013e 0E       		.uleb128 0xe
+ 1128 013f 3A       		.uleb128 0x3a
+ 1129 0140 0B       		.uleb128 0xb
+ 1130 0141 3B       		.uleb128 0x3b
+ 1131 0142 0B       		.uleb128 0xb
+ 1132 0143 00       		.byte	0
+ 1133 0144 00       		.byte	0
+ 1134 0145 00       		.byte	0
+ 1135              		.section	.debug_aranges,"",%progbits
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 24
+
+
+ 1136 0000 64000000 		.4byte	0x64
+ 1137 0004 0200     		.2byte	0x2
+ 1138 0006 00000000 		.4byte	.Ldebug_info0
+ 1139 000a 04       		.byte	0x4
+ 1140 000b 00       		.byte	0
+ 1141 000c 0000     		.2byte	0
+ 1142 000e 0000     		.2byte	0
+ 1143 0010 00000000 		.4byte	.LFB63
+ 1144 0014 0C000000 		.4byte	.LFE63-.LFB63
+ 1145 0018 00000000 		.4byte	.LFB68
+ 1146 001c 02000000 		.4byte	.LFE68-.LFB68
+ 1147 0020 00000000 		.4byte	.LFB64
+ 1148 0024 14000000 		.4byte	.LFE64-.LFB64
+ 1149 0028 00000000 		.4byte	.LFB66
+ 1150 002c 0E000000 		.4byte	.LFE66-.LFB66
+ 1151 0030 00000000 		.4byte	.LFB70
+ 1152 0034 18000000 		.4byte	.LFE70-.LFB70
+ 1153 0038 00000000 		.4byte	.LFB67
+ 1154 003c 14000000 		.4byte	.LFE67-.LFB67
+ 1155 0040 00000000 		.4byte	.LFB72
+ 1156 0044 20000000 		.4byte	.LFE72-.LFB72
+ 1157 0048 00000000 		.4byte	.LFB69
+ 1158 004c 20000000 		.4byte	.LFE69-.LFB69
+ 1159 0050 00000000 		.4byte	.LFB71
+ 1160 0054 24000000 		.4byte	.LFE71-.LFB71
+ 1161 0058 00000000 		.4byte	.LFB65
+ 1162 005c 58000000 		.4byte	.LFE65-.LFB65
+ 1163 0060 00000000 		.4byte	0
+ 1164 0064 00000000 		.4byte	0
+ 1165              		.section	.debug_ranges,"",%progbits
+ 1166              	.Ldebug_ranges0:
+ 1167 0000 00000000 		.4byte	.LFB63
+ 1168 0004 0C000000 		.4byte	.LFE63
+ 1169 0008 00000000 		.4byte	.LFB68
+ 1170 000c 02000000 		.4byte	.LFE68
+ 1171 0010 00000000 		.4byte	.LFB64
+ 1172 0014 14000000 		.4byte	.LFE64
+ 1173 0018 00000000 		.4byte	.LFB66
+ 1174 001c 0E000000 		.4byte	.LFE66
+ 1175 0020 00000000 		.4byte	.LFB70
+ 1176 0024 18000000 		.4byte	.LFE70
+ 1177 0028 00000000 		.4byte	.LFB67
+ 1178 002c 14000000 		.4byte	.LFE67
+ 1179 0030 00000000 		.4byte	.LFB72
+ 1180 0034 20000000 		.4byte	.LFE72
+ 1181 0038 00000000 		.4byte	.LFB69
+ 1182 003c 20000000 		.4byte	.LFE69
+ 1183 0040 00000000 		.4byte	.LFB71
+ 1184 0044 24000000 		.4byte	.LFE71
+ 1185 0048 00000000 		.4byte	.LFB65
+ 1186 004c 58000000 		.4byte	.LFE65
+ 1187 0050 00000000 		.4byte	0
+ 1188 0054 00000000 		.4byte	0
+ 1189              		.section	.debug_line,"",%progbits
+ 1190              	.Ldebug_line0:
+ 1191 0000 89020000 		.section	.debug_str,"MS",%progbits,1
+ 1191      0200C001 
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 25
+
+
+ 1191      00000201 
+ 1191      FB0E0D00 
+ 1191      01010101 
+ 1192              	.LASF42:
+ 1193 0000 6D617463 		.ascii	"matchPhotonInterrupt_1\000"
+ 1193      6850686F 
+ 1193      746F6E49 
+ 1193      6E746572 
+ 1193      72757074 
+ 1194              	.LASF35:
+ 1195 0017 55415254 		.ascii	"UART_1_Start\000"
+ 1195      5F315F53 
+ 1195      74617274 
+ 1195      00
+ 1196              	.LASF4:
+ 1197 0024 5F5F7569 		.ascii	"__uint8_t\000"
+ 1197      6E74385F 
+ 1197      7400
+ 1198              	.LASF23:
+ 1199 002e 73616D70 		.ascii	"sampler_state_process\000"
+ 1199      6C65725F 
+ 1199      73746174 
+ 1199      655F7072 
+ 1199      6F636573 
+ 1200              	.LASF27:
+ 1201 0044 6D61696E 		.ascii	"main_state\000"
+ 1201      5F737461 
+ 1201      746500
+ 1202              	.LASF5:
+ 1203 004f 5F5F696E 		.ascii	"__int32_t\000"
+ 1203      7433325F 
+ 1203      7400
+ 1204              	.LASF3:
+ 1205 0059 73686F72 		.ascii	"short unsigned int\000"
+ 1205      7420756E 
+ 1205      7369676E 
+ 1205      65642069 
+ 1205      6E7400
+ 1206              	.LASF33:
+ 1207 006c 4E4D6174 		.ascii	"NMatch_Reg_1_Read\000"
+ 1207      63685F52 
+ 1207      65675F31 
+ 1207      5F526561 
+ 1207      6400
+ 1208              	.LASF14:
+ 1209 007e 646F7562 		.ascii	"double\000"
+ 1209      6C6500
+ 1210              	.LASF12:
+ 1211 0085 696E7433 		.ascii	"int32_t\000"
+ 1211      325F7400 
+ 1212              	.LASF13:
+ 1213 008d 666C6F61 		.ascii	"float\000"
+ 1213      7400
+ 1214              	.LASF1:
+ 1215 0093 756E7369 		.ascii	"unsigned char\000"
+ 1215      676E6564 
+ 1215      20636861 
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 26
+
+
+ 1215      7200
+ 1216              	.LASF39:
+ 1217 00a1 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1217      43313120 
+ 1217      352E342E 
+ 1217      31203230 
+ 1217      31363036 
+ 1218 00d4 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1218      20726576 
+ 1218      6973696F 
+ 1218      6E203233 
+ 1218      37373135 
+ 1219 0107 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1219      66756E63 
+ 1219      74696F6E 
+ 1219      2D736563 
+ 1219      74696F6E 
+ 1220              	.LASF34:
+ 1221 012f 55415254 		.ascii	"UART_1_WriteTxData\000"
+ 1221      5F315F57 
+ 1221      72697465 
+ 1221      54784461 
+ 1221      746100
+ 1222              	.LASF36:
+ 1223 0142 6973725F 		.ascii	"isr_Rx_1_StartEx\000"
+ 1223      52785F31 
+ 1223      5F537461 
+ 1223      72744578 
+ 1223      00
+ 1224              	.LASF38:
+ 1225 0153 50574D5F 		.ascii	"PWM_1_Start\000"
+ 1225      315F5374 
+ 1225      61727400 
+ 1226              	.LASF22:
+ 1227 015f 7363616E 		.ascii	"scanOn_state_process\000"
+ 1227      4F6E5F73 
+ 1227      74617465 
+ 1227      5F70726F 
+ 1227      63657373 
+ 1228              	.LASF44:
+ 1229 0174 5278496E 		.ascii	"RxInterrupt_1\000"
+ 1229      74657272 
+ 1229      7570745F 
+ 1229      3100
+ 1230              	.LASF24:
+ 1231 0182 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1231      52784275 
+ 1231      66666572 
+ 1231      00
+ 1232              	.LASF18:
+ 1233 018f 65786974 		.ascii	"exit_state_process\000"
+ 1233      5F737461 
+ 1233      74655F70 
+ 1233      726F6365 
+ 1233      737300
+ 1234              	.LASF19:
+ 1235 01a2 7363616E 		.ascii	"scanOff_state_process\000"
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 27
+
+
+ 1235      4F66665F 
+ 1235      73746174 
+ 1235      655F7072 
+ 1235      6F636573 
+ 1236              	.LASF7:
+ 1237 01b8 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1237      20756E73 
+ 1237      69676E65 
+ 1237      6420696E 
+ 1237      7400
+ 1238              	.LASF29:
+ 1239 01ca 6D617463 		.ascii	"matchCounterControl_Reg_1_Write\000"
+ 1239      68436F75 
+ 1239      6E746572 
+ 1239      436F6E74 
+ 1239      726F6C5F 
+ 1240              	.LASF45:
+ 1241 01ea 6D61696E 		.ascii	"main\000"
+ 1241      00
+ 1242              	.LASF32:
+ 1243 01ef 6973725F 		.ascii	"isr_matchPhoton_1_Enable\000"
+ 1243      6D617463 
+ 1243      6850686F 
+ 1243      746F6E5F 
+ 1243      315F456E 
+ 1244              	.LASF37:
+ 1245 0208 6973725F 		.ascii	"isr_matchPhoton_1_StartEx\000"
+ 1245      6D617463 
+ 1245      6850686F 
+ 1245      746F6E5F 
+ 1245      315F5374 
+ 1246              	.LASF10:
+ 1247 0222 756E7369 		.ascii	"unsigned int\000"
+ 1247      676E6564 
+ 1247      20696E74 
+ 1247      00
+ 1248              	.LASF41:
+ 1249 022f 433A5C55 		.ascii	"C:\\Users\\lucas\\Google Drive (lucas.s10@aluno.ifs"
+ 1249      73657273 
+ 1249      5C6C7563 
+ 1249      61735C47 
+ 1249      6F6F676C 
+ 1250 025f 632E6564 		.ascii	"c.edu.br)\\ifsc\\bolsa\\pulseDet\\PSOC_pulseMatchDe"
+ 1250      752E6272 
+ 1250      295C6966 
+ 1250      73635C62 
+ 1250      6F6C7361 
+ 1251 028e 74656374 		.ascii	"tector\\Psoc_project\\pulseDet_1.cydsn\000"
+ 1251      6F725C50 
+ 1251      736F635F 
+ 1251      70726F6A 
+ 1251      6563745C 
+ 1252              	.LASF9:
+ 1253 02b3 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1253      206C6F6E 
+ 1253      6720756E 
+ 1253      7369676E 
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 28
+
+
+ 1253      65642069 
+ 1254              	.LASF11:
+ 1255 02ca 75696E74 		.ascii	"uint8_t\000"
+ 1255      385F7400 
+ 1256              	.LASF21:
+ 1257 02d2 73657452 		.ascii	"setRegs_state_process\000"
+ 1257      6567735F 
+ 1257      73746174 
+ 1257      655F7072 
+ 1257      6F636573 
+ 1258              	.LASF26:
+ 1259 02e8 6D61696E 		.ascii	"main_state_table\000"
+ 1259      5F737461 
+ 1259      74655F74 
+ 1259      61626C65 
+ 1259      00
+ 1260              	.LASF28:
+ 1261 02f9 55415254 		.ascii	"UART_1_GetChar\000"
+ 1261      5F315F47 
+ 1261      65744368 
+ 1261      617200
+ 1262              	.LASF25:
+ 1263 0308 73616D70 		.ascii	"samplerInput\000"
+ 1263      6C657249 
+ 1263      6E707574 
+ 1263      00
+ 1264              	.LASF17:
+ 1265 0315 73697A65 		.ascii	"sizetype\000"
+ 1265      74797065 
+ 1265      00
+ 1266              	.LASF30:
+ 1267 031e 6973725F 		.ascii	"isr_matchPhoton_1_Disable\000"
+ 1267      6D617463 
+ 1267      6850686F 
+ 1267      746F6E5F 
+ 1267      315F4469 
+ 1268              	.LASF8:
+ 1269 0338 6C6F6E67 		.ascii	"long long int\000"
+ 1269      206C6F6E 
+ 1269      6720696E 
+ 1269      7400
+ 1270              	.LASF40:
+ 1271 0346 6D61696E 		.ascii	"main.c\000"
+ 1271      2E6300
+ 1272              	.LASF15:
+ 1273 034d 63686172 		.ascii	"char\000"
+ 1273      00
+ 1274              	.LASF43:
+ 1275 0352 7374616E 		.ascii	"standby_state_process\000"
+ 1275      6462795F 
+ 1275      73746174 
+ 1275      655F7072 
+ 1275      6F636573 
+ 1276              	.LASF2:
+ 1277 0368 73686F72 		.ascii	"short int\000"
+ 1277      7420696E 
+ 1277      7400
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccBow2N5.s 			page 29
+
+
+ 1278              	.LASF6:
+ 1279 0372 6C6F6E67 		.ascii	"long int\000"
+ 1279      20696E74 
+ 1279      00
+ 1280              	.LASF16:
+ 1281 037b 6C6F6E67 		.ascii	"long double\000"
+ 1281      20646F75 
+ 1281      626C6500 
+ 1282              	.LASF0:
+ 1283 0387 7369676E 		.ascii	"signed char\000"
+ 1283      65642063 
+ 1283      68617200 
+ 1284              	.LASF31:
+ 1285 0393 636F756E 		.ascii	"count_th_Reg_1_Write\000"
+ 1285      745F7468 
+ 1285      5F526567 
+ 1285      5F315F57 
+ 1285      72697465 
+ 1286              	.LASF20:
+ 1287 03a8 73746172 		.ascii	"start_state_process\000"
+ 1287      745F7374 
+ 1287      6174655F 
+ 1287      70726F63 
+ 1287      65737300 
+ 1288              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
