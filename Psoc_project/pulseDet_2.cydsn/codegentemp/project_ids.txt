@@ -1,0 +1,6 @@
+C:\Users\lucas\Google Drive (lucas.s10@aluno.ifsc.edu.br)\ifsc\bolsa\pulseDet\PSOC_pulseMatchDetector\Psoc_project\pulseDet_2.cydsn\pulseDet_2.cyprj|e33898ce-054d-4d19-b41a-1fca2de18d40
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|93733334-c68f-42f2-be25-2c511e82aa51
+C:\Users\lucas\Documents\PSoC Creator\4.2\Downloads ( 4.2).cylib\Downloads ( 4.2).cyprj|10a44ead-59d6-4035-8b05-06a4ae5f06fd
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|7a685e82-0b37-4564-9ad7-db605faba87c
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|5fef663a-7d66-424a-9e18-e9785dd9566b
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|0e37e07a-dcee-46e4-a054-7cf8e946178a

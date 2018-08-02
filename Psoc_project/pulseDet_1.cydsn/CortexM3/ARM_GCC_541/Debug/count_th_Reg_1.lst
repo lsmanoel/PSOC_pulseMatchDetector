@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccUhUhJ5.s 			page 1
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\cc9qo7YI.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccUhUhJ5.s 			page 1
   28:Generated_Source\PSoC5/count_th_Reg_1.c **** *  Write a byte to the Control Register.
   29:Generated_Source\PSoC5/count_th_Reg_1.c **** *
   30:Generated_Source\PSoC5/count_th_Reg_1.c **** * Parameters:
-ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccUhUhJ5.s 			page 2
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\cc9qo7YI.s 			page 2
 
 
   31:Generated_Source\PSoC5/count_th_Reg_1.c **** *  control:  The value to be assigned to the Control Register.
@@ -83,7 +83,7 @@ ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccUhUhJ5.s 			page 1
   38              	.L3:
   39 0006 00BF     		.align	2
   40              	.L2:
-  41 0008 7A650040 		.word	1073767802
+  41 0008 7B650040 		.word	1073767803
   42              		.cfi_endproc
   43              	.LFE0:
   44              		.size	count_th_Reg_1_Write, .-count_th_Reg_1_Write
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccUhUhJ5.s 			page 1
   54              		.cfi_startproc
   55              		@ args = 0, pretend = 0, frame = 0
   56              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccUhUhJ5.s 			page 3
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\cc9qo7YI.s 			page 3
 
 
   57              		@ link register save eliminated.
@@ -132,7 +132,7 @@ ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccUhUhJ5.s 			page 1
   63              	.L6:
   64 0006 00BF     		.align	2
   65              	.L5:
-  66 0008 7A650040 		.word	1073767802
+  66 0008 7B650040 		.word	1073767803
   67              		.cfi_endproc
   68              	.LFE1:
   69              		.size	count_th_Reg_1_Read, .-count_th_Reg_1_Read
@@ -148,15 +148,15 @@ ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccUhUhJ5.s 			page 1
   79 000b 01       		.uleb128 0x1
   80 000c 28000000 		.4byte	.LASF14
   81 0010 0C       		.byte	0xc
-  82 0011 5A010000 		.4byte	.LASF15
-  83 0015 B6000000 		.4byte	.LASF16
+  82 0011 EF000000 		.4byte	.LASF15
+  83 0015 24010000 		.4byte	.LASF16
   84 0019 00000000 		.4byte	.Ldebug_ranges0+0
   85 001d 00000000 		.4byte	0
   86 0021 00000000 		.4byte	.Ldebug_line0
   87 0025 02       		.uleb128 0x2
   88 0026 01       		.byte	0x1
   89 0027 06       		.byte	0x6
-  90 0028 D2010000 		.4byte	.LASF0
+  90 0028 EB010000 		.4byte	.LASF0
   91 002c 02       		.uleb128 0x2
   92 002d 01       		.byte	0x1
   93 002e 08       		.byte	0x8
@@ -164,30 +164,30 @@ ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccUhUhJ5.s 			page 1
   95 0033 02       		.uleb128 0x2
   96 0034 02       		.byte	0x2
   97 0035 05       		.byte	0x5
-  98 0036 B9010000 		.4byte	.LASF2
+  98 0036 D2010000 		.4byte	.LASF2
   99 003a 02       		.uleb128 0x2
  100 003b 02       		.byte	0x2
  101 003c 07       		.byte	0x7
- 102 003d 38010000 		.4byte	.LASF3
+ 102 003d CD000000 		.4byte	.LASF3
  103 0041 02       		.uleb128 0x2
  104 0042 04       		.byte	0x4
  105 0043 05       		.byte	0x5
- 106 0044 C9010000 		.4byte	.LASF4
+ 106 0044 E2010000 		.4byte	.LASF4
  107 0048 02       		.uleb128 0x2
  108 0049 04       		.byte	0x4
  109 004a 07       		.byte	0x7
- 110 004b 26010000 		.4byte	.LASF5
+ 110 004b BB000000 		.4byte	.LASF5
  111 004f 02       		.uleb128 0x2
-ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccUhUhJ5.s 			page 4
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\cc9qo7YI.s 			page 4
 
 
  112 0050 08       		.byte	0x8
  113 0051 05       		.byte	0x5
- 114 0052 A6010000 		.4byte	.LASF6
+ 114 0052 BF010000 		.4byte	.LASF6
  115 0056 02       		.uleb128 0x2
  116 0057 08       		.byte	0x8
  117 0058 07       		.byte	0x7
- 118 0059 8F010000 		.4byte	.LASF7
+ 118 0059 A8010000 		.4byte	.LASF7
  119 005d 03       		.uleb128 0x3
  120 005e 04       		.byte	0x4
  121 005f 05       		.byte	0x5
@@ -195,9 +195,9 @@ ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccUhUhJ5.s 			page 1
  123 0064 02       		.uleb128 0x2
  124 0065 04       		.byte	0x4
  125 0066 07       		.byte	0x7
- 126 0067 82010000 		.4byte	.LASF8
+ 126 0067 17010000 		.4byte	.LASF8
  127 006b 04       		.uleb128 0x4
- 128 006c C3010000 		.4byte	.LASF12
+ 128 006c DC010000 		.4byte	.LASF12
  129 0070 02       		.byte	0x2
  130 0071 E401     		.2byte	0x1e4
  131 0073 2C000000 		.4byte	0x2c
@@ -208,20 +208,20 @@ ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccUhUhJ5.s 			page 1
  136 007e 02       		.uleb128 0x2
  137 007f 08       		.byte	0x8
  138 0080 04       		.byte	0x4
- 139 0081 53010000 		.4byte	.LASF10
+ 139 0081 E8000000 		.4byte	.LASF10
  140 0085 02       		.uleb128 0x2
  141 0086 01       		.byte	0x1
  142 0087 08       		.byte	0x8
- 143 0088 B4010000 		.4byte	.LASF11
+ 143 0088 CD010000 		.4byte	.LASF11
  144 008c 04       		.uleb128 0x4
- 145 008d 21010000 		.4byte	.LASF13
+ 145 008d B6000000 		.4byte	.LASF13
  146 0091 02       		.byte	0x2
  147 0092 8E02     		.2byte	0x28e
  148 0094 98000000 		.4byte	0x98
  149 0098 05       		.uleb128 0x5
  150 0099 6B000000 		.4byte	0x6b
  151 009d 06       		.uleb128 0x6
- 152 009e DE010000 		.4byte	.LASF17
+ 152 009e F7010000 		.4byte	.LASF17
  153 00a2 01       		.byte	0x1
  154 00a3 25       		.byte	0x25
  155 00a4 00000000 		.4byte	.LFB0
@@ -230,7 +230,7 @@ ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccUhUhJ5.s 			page 1
  158 00ad 9C       		.byte	0x9c
  159 00ae C0000000 		.4byte	0xc0
  160 00b2 07       		.uleb128 0x7
- 161 00b3 4B010000 		.4byte	.LASF18
+ 161 00b3 E0000000 		.4byte	.LASF18
  162 00b7 01       		.byte	0x1
  163 00b8 25       		.byte	0x25
  164 00b9 6B000000 		.4byte	0x6b
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccUhUhJ5.s 			page 1
  166 00be 50       		.byte	0x50
  167 00bf 00       		.byte	0
  168 00c0 08       		.uleb128 0x8
-ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccUhUhJ5.s 			page 5
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\cc9qo7YI.s 			page 5
 
 
  169 00c1 00000000 		.4byte	.LASF19
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccUhUhJ5.s 			page 1
  223 002b 00       		.byte	0
  224 002c 03       		.uleb128 0x3
  225 002d 0E       		.uleb128 0xe
-ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccUhUhJ5.s 			page 6
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\cc9qo7YI.s 			page 6
 
 
  226 002e 3A       		.uleb128 0x3a
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccUhUhJ5.s 			page 1
  280 0065 00       		.byte	0
  281 0066 08       		.uleb128 0x8
  282 0067 2E       		.uleb128 0x2e
-ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccUhUhJ5.s 			page 7
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\cc9qo7YI.s 			page 7
 
 
  283 0068 00       		.byte	0
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccUhUhJ5.s 			page 1
  333 0000 636F756E 		.ascii	"count_th_Reg_1_Read\000"
  333      745F7468 
  333      5F526567 
-ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccUhUhJ5.s 			page 8
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\cc9qo7YI.s 			page 8
 
 
  333      5F315F52 
@@ -447,87 +447,88 @@ ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccUhUhJ5.s 			page 1
  341      74696F6E 
  341      2D736563 
  341      74696F6E 
- 342              	.LASF16:
- 343 00b6 433A5C55 		.ascii	"C:\\Users\\lucas\\Google Drive (lucas.s10@aluno.ifs"
- 343      73657273 
- 343      5C6C7563 
- 343      61735C47 
- 343      6F6F676C 
- 344 00e6 632E6564 		.ascii	"c.edu.br)\\ifsc\\bolsa\\pulseDet\\Workspace01\\puls"
- 344      752E6272 
- 344      295C6966 
- 344      73635C62 
- 344      6F6C7361 
- 345 0114 65446574 		.ascii	"eDet_1.cydsn\000"
- 345      5F312E63 
- 345      7964736E 
- 345      00
- 346              	.LASF13:
- 347 0121 72656738 		.ascii	"reg8\000"
- 347      00
- 348              	.LASF5:
- 349 0126 6C6F6E67 		.ascii	"long unsigned int\000"
- 349      20756E73 
- 349      69676E65 
- 349      6420696E 
- 349      7400
- 350              	.LASF3:
- 351 0138 73686F72 		.ascii	"short unsigned int\000"
- 351      7420756E 
- 351      7369676E 
- 351      65642069 
- 351      6E7400
- 352              	.LASF18:
-ARM GAS  C:\Users\lucas\AppData\Local\Temp\ccUhUhJ5.s 			page 9
+ 342              	.LASF13:
+ 343 00b6 72656738 		.ascii	"reg8\000"
+ 343      00
+ 344              	.LASF5:
+ 345 00bb 6C6F6E67 		.ascii	"long unsigned int\000"
+ 345      20756E73 
+ 345      69676E65 
+ 345      6420696E 
+ 345      7400
+ 346              	.LASF3:
+ 347 00cd 73686F72 		.ascii	"short unsigned int\000"
+ 347      7420756E 
+ 347      7369676E 
+ 347      65642069 
+ 347      6E7400
+ 348              	.LASF18:
+ 349 00e0 636F6E74 		.ascii	"control\000"
+ 349      726F6C00 
+ 350              	.LASF10:
+ 351 00e8 646F7562 		.ascii	"double\000"
+ 351      6C6500
+ 352              	.LASF15:
+ 353 00ef 47656E65 		.ascii	"Generated_Source\\PSoC5\\count_th_Reg_1.c\000"
+ 353      72617465 
+ 353      645F536F 
+ 353      75726365 
+ 353      5C50536F 
+ 354              	.LASF8:
+ 355 0117 756E7369 		.ascii	"unsigned int\000"
+ 355      676E6564 
+ 355      20696E74 
+ARM GAS  C:\Users\lucas\AppData\Local\Temp\cc9qo7YI.s 			page 9
 
 
- 353 014b 636F6E74 		.ascii	"control\000"
- 353      726F6C00 
- 354              	.LASF10:
- 355 0153 646F7562 		.ascii	"double\000"
- 355      6C6500
- 356              	.LASF15:
- 357 015a 47656E65 		.ascii	"Generated_Source\\PSoC5\\count_th_Reg_1.c\000"
- 357      72617465 
- 357      645F536F 
- 357      75726365 
- 357      5C50536F 
- 358              	.LASF8:
- 359 0182 756E7369 		.ascii	"unsigned int\000"
- 359      676E6564 
- 359      20696E74 
- 359      00
+ 355      00
+ 356              	.LASF16:
+ 357 0124 433A5C55 		.ascii	"C:\\Users\\lucas\\Google Drive (lucas.s10@aluno.ifs"
+ 357      73657273 
+ 357      5C6C7563 
+ 357      61735C47 
+ 357      6F6F676C 
+ 358 0154 632E6564 		.ascii	"c.edu.br)\\ifsc\\bolsa\\pulseDet\\PSOC_pulseMatchDe"
+ 358      752E6272 
+ 358      295C6966 
+ 358      73635C62 
+ 358      6F6C7361 
+ 359 0183 74656374 		.ascii	"tector\\Psoc_project\\pulseDet_1.cydsn\000"
+ 359      6F725C50 
+ 359      736F635F 
+ 359      70726F6A 
+ 359      6563745C 
  360              	.LASF7:
- 361 018f 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 361 01a8 6C6F6E67 		.ascii	"long long unsigned int\000"
  361      206C6F6E 
  361      6720756E 
  361      7369676E 
  361      65642069 
  362              	.LASF6:
- 363 01a6 6C6F6E67 		.ascii	"long long int\000"
+ 363 01bf 6C6F6E67 		.ascii	"long long int\000"
  363      206C6F6E 
  363      6720696E 
  363      7400
  364              	.LASF11:
- 365 01b4 63686172 		.ascii	"char\000"
+ 365 01cd 63686172 		.ascii	"char\000"
  365      00
  366              	.LASF2:
- 367 01b9 73686F72 		.ascii	"short int\000"
+ 367 01d2 73686F72 		.ascii	"short int\000"
  367      7420696E 
  367      7400
  368              	.LASF12:
- 369 01c3 75696E74 		.ascii	"uint8\000"
+ 369 01dc 75696E74 		.ascii	"uint8\000"
  369      3800
  370              	.LASF4:
- 371 01c9 6C6F6E67 		.ascii	"long int\000"
+ 371 01e2 6C6F6E67 		.ascii	"long int\000"
  371      20696E74 
  371      00
  372              	.LASF0:
- 373 01d2 7369676E 		.ascii	"signed char\000"
+ 373 01eb 7369676E 		.ascii	"signed char\000"
  373      65642063 
  373      68617200 
  374              	.LASF17:
- 375 01de 636F756E 		.ascii	"count_th_Reg_1_Write\000"
+ 375 01f7 636F756E 		.ascii	"count_th_Reg_1_Write\000"
  375      745F7468 
  375      5F526567 
  375      5F315F57 

@@ -1,5 +1,5 @@
 -- Project:   pulseDet_1
--- Generated: 07/26/2018 02:20:17
+-- Generated: 07/31/2018 11:02:00
 -- PSoC Creator  4.2
 
 ENTITY pulseDet_1 IS
@@ -32,17 +32,14 @@ ARCHITECTURE __DEFAULT__ OF pulseDet_1 IS
     SIGNAL ClockBlock_PLL_OUT : bit;
     SIGNAL ClockBlock_XTAL : bit;
     SIGNAL ClockBlock_XTAL_32KHZ : bit;
-    SIGNAL Net_1 : bit;
     SIGNAL Net_148 : bit;
     ATTRIBUTE global_signal OF Net_148 : SIGNAL IS true;
     SIGNAL Net_1482 : bit;
-    SIGNAL Net_1483 : bit;
     SIGNAL Net_148_local : bit;
-    SIGNAL Net_1529 : bit;
-    ATTRIBUTE global_signal OF Net_1529 : SIGNAL IS true;
-    SIGNAL Net_1529_local : bit;
     SIGNAL Net_1596 : bit;
     ATTRIBUTE soft OF Net_1596 : SIGNAL IS 1;
+    SIGNAL Net_1597 : bit;
+    SIGNAL Net_1598 : bit;
     SIGNAL Net_167_0 : bit;
     SIGNAL Net_167_1 : bit;
     SIGNAL Net_167_2 : bit;
@@ -52,6 +49,10 @@ ARCHITECTURE __DEFAULT__ OF pulseDet_1 IS
     SIGNAL Net_167_6 : bit;
     SIGNAL Net_167_7 : bit;
     SIGNAL Net_169 : bit;
+    SIGNAL Net_1699 : bit;
+    ATTRIBUTE global_signal OF Net_1699 : SIGNAL IS true;
+    SIGNAL Net_1699_local : bit;
+    SIGNAL Net_1956 : bit;
     SIGNAL Net_261 : bit;
     SIGNAL Net_286 : bit;
     SIGNAL Net_294 : bit;
@@ -66,7 +67,6 @@ ARCHITECTURE __DEFAULT__ OF pulseDet_1 IS
     SIGNAL Net_304_6 : bit;
     SIGNAL Net_304_7 : bit;
     SIGNAL Net_3_local : bit;
-    SIGNAL Net_4 : bit;
     SIGNAL Net_82 : bit;
     SIGNAL Net_87 : bit;
     SIGNAL Net_87_SYNCOUT : bit;
@@ -594,8 +594,8 @@ BEGIN
             dclk_0 => Net_3_local,
             dclk_glb_1 => \UART_1:Net_9\,
             dclk_1 => \UART_1:Net_9_local\,
-            dclk_glb_2 => Net_1529,
-            dclk_2 => Net_1529_local,
+            dclk_glb_2 => Net_1699,
+            dclk_2 => Net_1699_local,
             dclk_glb_3 => Net_148,
             dclk_3 => Net_148_local,
             dclk_glb_ff_3 => \ClockBlock.dclk_glb_ff_3__sig\);
@@ -866,7 +866,7 @@ BEGIN
         PORT MAP(
             pa_out => inputPin_A_1(0)__PA,
             oe => open,
-            fb => Net_1,
+            fb => Net_1598,
             pad_in => inputPin_A_1(0)_PAD,
             in_clock => open,
             in_clock_en => '1',
@@ -957,7 +957,7 @@ BEGIN
         PORT MAP(
             pa_out => inputPin_B_1(0)__PA,
             oe => open,
-            fb => Net_4,
+            fb => Net_1597,
             pad_in => inputPin_B_1(0)_PAD,
             in_clock => open,
             in_clock_en => '1',
@@ -1163,7 +1163,7 @@ BEGIN
             q => Net_1596,
             main_0 => Net_167_7,
             main_1 => Net_167_6,
-            main_2 => Net_1483,
+            main_2 => Net_1956,
             main_3 => Net_304_7,
             main_4 => Net_304_6,
             main_5 => \MODULE_7:g1:a0:gx:u0:eq_5\);
@@ -1213,7 +1213,7 @@ BEGIN
             control_5 => \matchCounterControl_Reg_1:control_5\,
             control_4 => \matchCounterControl_Reg_1:control_4\,
             control_3 => \matchCounterControl_Reg_1:control_3\,
-            control_2 => Net_1483,
+            control_2 => Net_1956,
             control_1 => Net_286,
             control_0 => Net_169,
             busclk => ClockBlock_BUS_CLK);
@@ -1470,7 +1470,7 @@ BEGIN
             clken_mode => 1)
         PORT MAP(
             q => Net_167_7,
-            clock_0 => Net_1529,
+            clock_0 => Net_1699,
             main_0 => Net_167_7,
             main_1 => Net_1596,
             main_2 => Net_169,
@@ -1490,7 +1490,7 @@ BEGIN
             clken_mode => 1)
         PORT MAP(
             q => Net_167_6,
-            clock_0 => Net_1529,
+            clock_0 => Net_1699,
             main_0 => Net_1596,
             main_1 => Net_169,
             main_2 => Net_167_6,
@@ -1509,7 +1509,7 @@ BEGIN
             clken_mode => 1)
         PORT MAP(
             q => Net_167_5,
-            clock_0 => Net_1529,
+            clock_0 => Net_1699,
             main_0 => Net_1596,
             main_1 => Net_169,
             main_2 => Net_167_5,
@@ -1527,7 +1527,7 @@ BEGIN
             clken_mode => 1)
         PORT MAP(
             q => Net_167_4,
-            clock_0 => Net_1529,
+            clock_0 => Net_1699,
             main_0 => Net_1596,
             main_1 => Net_169,
             main_2 => Net_167_4,
@@ -1544,7 +1544,7 @@ BEGIN
             clken_mode => 1)
         PORT MAP(
             q => Net_167_3,
-            clock_0 => Net_1529,
+            clock_0 => Net_1699,
             main_0 => Net_1596,
             main_1 => Net_169,
             main_2 => Net_167_3,
@@ -1560,7 +1560,7 @@ BEGIN
             clken_mode => 1)
         PORT MAP(
             q => Net_167_2,
-            clock_0 => Net_1529,
+            clock_0 => Net_1699,
             main_0 => Net_1596,
             main_1 => Net_169,
             main_2 => Net_167_2,
@@ -1575,7 +1575,7 @@ BEGIN
             clken_mode => 1)
         PORT MAP(
             q => Net_167_1,
-            clock_0 => Net_1529,
+            clock_0 => Net_1699,
             main_0 => Net_1596,
             main_1 => Net_169,
             main_2 => Net_167_1,
@@ -1589,7 +1589,7 @@ BEGIN
             clken_mode => 1)
         PORT MAP(
             q => Net_167_0,
-            clock_0 => Net_1529,
+            clock_0 => Net_1699,
             main_0 => Net_1596,
             main_1 => Net_169,
             main_2 => Net_167_0);

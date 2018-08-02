@@ -59,7 +59,7 @@ CY_ISR(matchPhotonInterrupt_1)
 
 CY_ISR(RxInterrupt_1)
 {	
-    main_state = UART_1_GetChar()-48;
+    main_state = UART_1_GetChar();
 }
 
 int main(void)
@@ -107,6 +107,9 @@ void start_state_process()//1
     
     main_state = STANDBY_STATE;
     count_th_Reg_1_Write(255);
+    
+    //Control_Reg_1_Write(255);
+    matchCounterControl_Reg_1_Write(OFF_COMMAND);
 }
 
 void standby_state_process()//2
@@ -132,7 +135,7 @@ void scanOff_state_process()//5
 void sampler_state_process()//5
 {
     main_state = STANDBY_STATE;
-    samplerInput = NMatch_Reg_1_Read() - 128;
+    samplerInput = NMatch_Reg_1_Read();
     UART_1_WriteTxData(samplerInput);
     //UART_1_PutChar((char)(samplerInput));
 }
@@ -140,6 +143,6 @@ void sampler_state_process()//5
 void setRegs_state_process()//6
 {
     while(main_state==SETREGS_STATE){}
-    count_th_Reg_1_Write(main_state+47);
+    count_th_Reg_1_Write(main_state);
     main_state = STANDBY_STATE;    
 }

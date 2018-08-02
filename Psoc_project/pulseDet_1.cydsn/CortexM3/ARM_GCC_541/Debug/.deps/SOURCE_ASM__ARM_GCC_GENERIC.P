@@ -1,10 +1,10 @@
-C:/Users/lucas/Google\ Drive\ (lucas.s10@aluno.ifsc.edu.br)/ifsc/bolsa/pulseDet/Workspace01/pulseDet_1.cydsn/CortexM3/ARM_GCC_541/Debug/CyBootAsmGnu.o : C:/Users/lucas/Google\ Drive\ (lucas.s10@aluno.ifsc.edu.br)/ifsc/bolsa/pulseDet/Workspace01/pulseDet_1.cydsn/Generated_Source/PSoC5/CyBootAsmGnu.s C:/Users/lucas/Google\ Drive\ (lucas.s10@aluno.ifsc.edu.br)/ifsc/bolsa/pulseDet/Workspace01/pulseDet_1.cydsn/Generated_Source/PSoC5/cydevicegnu.inc C:/Users/lucas/Google\ Drive\ (lucas.s10@aluno.ifsc.edu.br)/ifsc/bolsa/pulseDet/Workspace01/pulseDet_1.cydsn/Generated_Source/PSoC5/cydevicegnu_trm.inc C:/Users/lucas/Google\ Drive\ (lucas.s10@aluno.ifsc.edu.br)/ifsc/bolsa/pulseDet/Workspace01/pulseDet_1.cydsn/Generated_Source/PSoC5/cyfittergnu.inc 
+C:/Users/lucas/Google\ Drive\ (lucas.s10@aluno.ifsc.edu.br)/ifsc/bolsa/pulseDet/PSOC_pulseMatchDetector/Psoc_project/pulseDet_1.cydsn/CortexM3/ARM_GCC_541/Debug/CyBootAsmGnu.o : C:/Users/lucas/Google\ Drive\ (lucas.s10@aluno.ifsc.edu.br)/ifsc/bolsa/pulseDet/PSOC_pulseMatchDetector/Psoc_project/pulseDet_1.cydsn/Generated_Source/PSoC5/CyBootAsmGnu.s C:/Users/lucas/Google\ Drive\ (lucas.s10@aluno.ifsc.edu.br)/ifsc/bolsa/pulseDet/PSOC_pulseMatchDetector/Psoc_project/pulseDet_1.cydsn/Generated_Source/PSoC5/cydevicegnu.inc C:/Users/lucas/Google\ Drive\ (lucas.s10@aluno.ifsc.edu.br)/ifsc/bolsa/pulseDet/PSOC_pulseMatchDetector/Psoc_project/pulseDet_1.cydsn/Generated_Source/PSoC5/cydevicegnu_trm.inc C:/Users/lucas/Google\ Drive\ (lucas.s10@aluno.ifsc.edu.br)/ifsc/bolsa/pulseDet/PSOC_pulseMatchDetector/Psoc_project/pulseDet_1.cydsn/Generated_Source/PSoC5/cyfittergnu.inc 
 
-C:/Users/lucas/Google\ Drive\ (lucas.s10@aluno.ifsc.edu.br)/ifsc/bolsa/pulseDet/Workspace01/pulseDet_1.cydsn/Generated_Source/PSoC5/CyBootAsmGnu.s : 
+C:/Users/lucas/Google\ Drive\ (lucas.s10@aluno.ifsc.edu.br)/ifsc/bolsa/pulseDet/PSOC_pulseMatchDetector/Psoc_project/pulseDet_1.cydsn/Generated_Source/PSoC5/CyBootAsmGnu.s : 
 
-C:/Users/lucas/Google\ Drive\ (lucas.s10@aluno.ifsc.edu.br)/ifsc/bolsa/pulseDet/Workspace01/pulseDet_1.cydsn/Generated_Source/PSoC5/cydevicegnu.inc : 
+C:/Users/lucas/Google\ Drive\ (lucas.s10@aluno.ifsc.edu.br)/ifsc/bolsa/pulseDet/PSOC_pulseMatchDetector/Psoc_project/pulseDet_1.cydsn/Generated_Source/PSoC5/cydevicegnu.inc : 
 
-C:/Users/lucas/Google\ Drive\ (lucas.s10@aluno.ifsc.edu.br)/ifsc/bolsa/pulseDet/Workspace01/pulseDet_1.cydsn/Generated_Source/PSoC5/cydevicegnu_trm.inc : 
+C:/Users/lucas/Google\ Drive\ (lucas.s10@aluno.ifsc.edu.br)/ifsc/bolsa/pulseDet/PSOC_pulseMatchDetector/Psoc_project/pulseDet_1.cydsn/Generated_Source/PSoC5/cydevicegnu_trm.inc : 
 
-C:/Users/lucas/Google\ Drive\ (lucas.s10@aluno.ifsc.edu.br)/ifsc/bolsa/pulseDet/Workspace01/pulseDet_1.cydsn/Generated_Source/PSoC5/cyfittergnu.inc : 
+C:/Users/lucas/Google\ Drive\ (lucas.s10@aluno.ifsc.edu.br)/ifsc/bolsa/pulseDet/PSOC_pulseMatchDetector/Psoc_project/pulseDet_1.cydsn/Generated_Source/PSoC5/cyfittergnu.inc : 
 

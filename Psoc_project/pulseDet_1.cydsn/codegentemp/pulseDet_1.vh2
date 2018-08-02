@@ -2,7 +2,7 @@
 --	Conversion of pulseDet_1.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Thu Jul 26 02:20:16 2018
+--	Tue Jul 31 11:01:58 2018
 --
 
 USE cypress.cypress.all;
@@ -14,13 +14,13 @@ END top_RTL;
 ARCHITECTURE R_T_L OF top_RTL IS
 SIGNAL Net_3 : bit;
 SIGNAL \EdgeDetect_A_1:last\ : bit;
-SIGNAL Net_1 : bit;
+SIGNAL Net_1598 : bit;
 SIGNAL Net_13 : bit;
 SIGNAL \EdgeDetect_B_1:last\ : bit;
-SIGNAL Net_4 : bit;
+SIGNAL Net_1597 : bit;
 SIGNAL Net_14 : bit;
-SIGNAL Net_291 : bit;
-SIGNAL Net_1529 : bit;
+SIGNAL Net_1599 : bit;
+SIGNAL Net_1699 : bit;
 SIGNAL Net_167_7 : bit;
 SIGNAL Net_1596 : bit;
 ATTRIBUTE soft of Net_1596:SIGNAL IS '1';
@@ -241,7 +241,7 @@ SIGNAL \matchCounterControl_Reg_1:rst\ : bit;
 SIGNAL \matchCounterControl_Reg_1:control_out_0\ : bit;
 SIGNAL Net_286 : bit;
 SIGNAL \matchCounterControl_Reg_1:control_out_1\ : bit;
-SIGNAL Net_1483 : bit;
+SIGNAL Net_1956 : bit;
 SIGNAL \matchCounterControl_Reg_1:control_out_2\ : bit;
 SIGNAL Net_34 : bit;
 SIGNAL \matchCounterControl_Reg_1:control_out_3\ : bit;
@@ -641,8 +641,8 @@ SIGNAL \PWM_1:Net_113\ : bit;
 SIGNAL \PWM_1:Net_63\ : bit;
 SIGNAL \PWM_1:Net_57\ : bit;
 SIGNAL \PWM_1:Net_54\ : bit;
-SIGNAL Net_1174 : bit;
-SIGNAL Net_1171 : bit;
+SIGNAL Net_2005 : bit;
+SIGNAL Net_2002 : bit;
 SIGNAL \PWM_1:Net_114\ : bit;
 SIGNAL cmp_vv_vv_MODGEN_7 : bit;
 SIGNAL \count_th_Reg_1:clk\ : bit;
@@ -1012,7 +1012,7 @@ Net_1596 <= ((not Net_167_7 and not Net_167_6 and not Net_304_7 and not Net_304_
 	OR (not Net_167_6 and not Net_304_6 and Net_167_7 and Net_304_7 and \MODULE_7:g1:a0:gx:u0:eq_5\)
 	OR (not Net_167_7 and not Net_304_7 and Net_167_6 and Net_304_6 and \MODULE_7:g1:a0:gx:u0:eq_5\)
 	OR (Net_167_7 and Net_167_6 and Net_304_7 and Net_304_6 and \MODULE_7:g1:a0:gx:u0:eq_5\)
-	OR Net_1483);
+	OR Net_1956);
 
 Net_1482 <= ((not Net_167_7 and not Net_167_6 and not Net_304_7 and not Net_304_6 and \MODULE_7:g1:a0:gx:u0:eq_5\)
 	OR (not Net_167_6 and not Net_304_6 and Net_167_7 and Net_304_7 and \MODULE_7:g1:a0:gx:u0:eq_5\)
@@ -1152,12 +1152,12 @@ Clock_1:cy_clock_v1_0
 	PORT MAP(reset=>zero,
 		clock=>zero,
 		control=>(\matchCounterControl_Reg_1:control_7\, \matchCounterControl_Reg_1:control_6\, \matchCounterControl_Reg_1:control_5\, \matchCounterControl_Reg_1:control_4\,
-			\matchCounterControl_Reg_1:control_3\, Net_1483, Net_286, Net_169));
+			\matchCounterControl_Reg_1:control_3\, Net_1956, Net_286, Net_169));
 \NMatch_Reg_1:sts:sts_reg\:cy_psoc3_status
 	GENERIC MAP(cy_force_order=>'1',
 		cy_md_select=>"00000000")
 	PORT MAP(reset=>zero,
-		clock=>Net_1529,
+		clock=>Net_1699,
 		status=>(Net_167_7, Net_167_6, Net_167_5, Net_167_4,
 			Net_167_3, Net_167_2, Net_167_1, Net_167_0));
 Rx_1:cy_psoc3_pins_v1_10
@@ -1663,7 +1663,7 @@ inputPin_A_1:cy_psoc3_pins_v1_10
 		input_buffer_sel=>"00")
 	PORT MAP(oe=>(tmpOE__Rx_1_net_0),
 		y=>(zero),
-		fb=>Net_1,
+		fb=>Net_1598,
 		analog=>(open),
 		io=>(tmpIO_0__inputPin_A_1_net_0),
 		siovref=>(tmpSIOVREF__inputPin_A_1_net_0),
@@ -1733,7 +1733,7 @@ inputPin_B_1:cy_psoc3_pins_v1_10
 		input_buffer_sel=>"00")
 	PORT MAP(oe=>(tmpOE__Rx_1_net_0),
 		y=>(zero),
-		fb=>Net_4,
+		fb=>Net_1597,
 		analog=>(open),
 		io=>(tmpIO_0__inputPin_B_1_net_0),
 		siovref=>(tmpSIOVREF__inputPin_B_1_net_0),
@@ -1838,10 +1838,10 @@ Clock_4:cy_clock_v1_0
 		id=>"a7d66de8-6867-472a-a145-775aa573c41e",
 		source_clock_id=>"",
 		divisor=>0,
-		period=>"1000000000000",
+		period=>"400000000000",
 		is_direct=>'0',
 		is_digital=>'1')
-	PORT MAP(clock_out=>Net_1529,
+	PORT MAP(clock_out=>Net_1699,
 		dig_domain_out=>open);
 Clock_5:cy_clock_v1_0
 	GENERIC MAP(cy_registers=>"",
@@ -1882,44 +1882,44 @@ Clock_5:cy_clock_v1_0
 	PORT MAP(x=>\MODULE_7:g1:a0:gx:u0:gt_2\,
 		y=>\MODULE_7:g1:a0:gx:u0:gti_0\);
 \EdgeDetect_A_1:last\:cy_dff
-	PORT MAP(d=>Net_1,
+	PORT MAP(d=>Net_1598,
 		clk=>Net_3,
 		q=>\EdgeDetect_A_1:last\);
 \EdgeDetect_B_1:last\:cy_dff
-	PORT MAP(d=>Net_4,
+	PORT MAP(d=>Net_1597,
 		clk=>Net_3,
 		q=>\EdgeDetect_B_1:last\);
 Net_167_7:cy_dff
 	PORT MAP(d=>Net_167_7D,
-		clk=>Net_1529,
+		clk=>Net_1699,
 		q=>Net_167_7);
 Net_167_6:cy_dff
 	PORT MAP(d=>Net_167_6D,
-		clk=>Net_1529,
+		clk=>Net_1699,
 		q=>Net_167_6);
 Net_167_5:cy_dff
 	PORT MAP(d=>Net_167_5D,
-		clk=>Net_1529,
+		clk=>Net_1699,
 		q=>Net_167_5);
 Net_167_4:cy_dff
 	PORT MAP(d=>Net_167_4D,
-		clk=>Net_1529,
+		clk=>Net_1699,
 		q=>Net_167_4);
 Net_167_3:cy_dff
 	PORT MAP(d=>Net_167_3D,
-		clk=>Net_1529,
+		clk=>Net_1699,
 		q=>Net_167_3);
 Net_167_2:cy_dff
 	PORT MAP(d=>Net_167_2D,
-		clk=>Net_1529,
+		clk=>Net_1699,
 		q=>Net_167_2);
 Net_167_1:cy_dff
 	PORT MAP(d=>Net_167_1D,
-		clk=>Net_1529,
+		clk=>Net_1699,
 		q=>Net_167_1);
 Net_167_0:cy_dff
 	PORT MAP(d=>Net_167_0D,
-		clk=>Net_1529,
+		clk=>Net_1699,
 		q=>Net_167_0);
 \UART_1:BUART:reset_reg\:cy_dff
 	PORT MAP(d=>zero,

@@ -1,6 +1,6 @@
 // ======================================================================
 // pulseDet_1.v generated from TopDesign.cysch
-// 07/26/2018 at 02:20
+// 07/31/2018 at 11:01
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -460,28 +460,28 @@ endmodule
 // top
 module top ;
 
-          wire  Net_1410;
-          wire  Net_1409;
-          wire  Net_1408;
-          wire  Net_1407;
-          wire  Net_1406;
-          wire  Net_1405;
-          wire  Net_1404;
-          wire  Net_1403;
-          wire  Net_1402;
-          wire  Net_1401;
-          wire  Net_1010;
-          wire  Net_1412;
-          wire  Net_1180;
-          wire  Net_1179;
-          wire  Net_1178;
-          wire  Net_1177;
-          wire  Net_1176;
-          wire  Net_1175;
-          wire  Net_1174;
-          wire  Net_1173;
-          wire  Net_1172;
-          wire  Net_1171;
+          wire  Net_1840;
+          wire  Net_1839;
+          wire  Net_1838;
+          wire  Net_1837;
+          wire  Net_1836;
+          wire  Net_1835;
+          wire  Net_1834;
+          wire  Net_1833;
+          wire  Net_1832;
+          wire  Net_1831;
+          wire  Net_1868;
+          wire  Net_1889;
+          wire  Net_2011;
+          wire  Net_2010;
+          wire  Net_2009;
+          wire  Net_2008;
+          wire  Net_2007;
+          wire  Net_2006;
+          wire  Net_2005;
+          wire  Net_2004;
+          wire  Net_2003;
+          wire  Net_2002;
           wire  Net_93;
           wire  Net_92;
           wire  Net_91;
@@ -492,15 +492,15 @@ module top ;
           wire  Net_83;
           wire  Net_81;
           wire  Net_87;
-          wire  Net_1421;
-          wire  Net_1420;
-          wire  Net_1419;
-          wire  Net_1418;
-          wire  Net_1417;
-          wire  Net_1416;
-          wire  Net_1415;
-          wire  Net_1414;
-          wire  Net_1413;
+          wire  Net_2034;
+          wire  Net_2033;
+          wire  Net_2032;
+          wire  Net_2031;
+          wire  Net_2030;
+          wire  Net_2029;
+          wire  Net_2028;
+          wire  Net_2027;
+          wire  Net_2026;
           wire  Net_41;
           wire  Net_40;
           wire  Net_39;
@@ -508,36 +508,36 @@ module top ;
           wire  Net_37;
           wire  Net_36;
           wire  Net_34;
-          wire  Net_291;
-          wire  Net_10;
-          wire  Net_4;
-          wire  Net_1;
-          wire  Net_1483;
-          wire  Net_1596;
+          wire  Net_1599;
+          wire  Net_2001;
+          wire  Net_1597;
+          wire  Net_1598;
           wire  Net_1482;
-          wire  Net_1529;
-          wire  Net_148;
-          wire  Net_276;
-          wire  Net_286;
+          wire  Net_1956;
+          wire  Net_1596;
           wire  Net_169;
+          wire  Net_286;
           wire [7:0] Net_167;
           wire [7:0] Net_304;
+          wire  Net_3;
+          wire  Net_14;
+          wire  Net_13;
+          wire  Net_1699;
+          wire  Net_148;
+          wire  Net_276;
           wire  Net_261;
           wire  Net_294;
           wire  Net_160;
           wire  Net_82;
-          wire  Net_14;
-          wire  Net_13;
-          wire  Net_3;
 
     EdgeDetect_v1_0 EdgeDetect_A_1 (
-        .d(Net_1),
+        .d(Net_1598),
         .det(Net_13),
         .clock(Net_3));
     defparam EdgeDetect_A_1.EdgeType = 2;
 
     EdgeDetect_v1_0 EdgeDetect_B_1 (
-        .d(Net_4),
+        .d(Net_1597),
         .det(Net_14),
         .clock(Net_3));
     defparam EdgeDetect_B_1.EdgeType = 0;
@@ -555,18 +555,18 @@ module top ;
 
 
 
-    assign Net_291 = Net_13 & Net_14;
+    assign Net_1599 = Net_13 & Net_14;
 
     BasicCounter_v1_0 matchCounter_1 (
         .en(Net_169),
         .cnt(Net_167[7:0]),
         .reset(Net_1596),
-        .clock(Net_1529));
+        .clock(Net_1699));
     defparam matchCounter_1.Width = 8;
 
     CyControlReg_v1_80 matchCounterControl_Reg_1 (
         .control_1(Net_286),
-        .control_2(Net_1483),
+        .control_2(Net_1956),
         .control_3(Net_34),
         .control_0(Net_169),
         .control_4(Net_36),
@@ -593,12 +593,12 @@ module top ;
         .status_1(1'b0),
         .status_2(1'b0),
         .status_3(1'b0),
-        .clock(Net_1529),
+        .clock(Net_1699),
         .status_4(1'b0),
         .status_5(1'b0),
         .status_6(1'b0),
         .status_7(1'b0),
-        .intr(Net_1421),
+        .intr(Net_2034),
         .status_bus(Net_167[7:0]));
     defparam NMatch_Reg_1.Bit0Mode = 0;
     defparam NMatch_Reg_1.Bit1Mode = 0;
@@ -850,7 +850,7 @@ module top ;
 		inputPin_A_1
 		 (.oe(tmpOE__inputPin_A_1_net),
 		  .y({1'b0}),
-		  .fb({Net_1}),
+		  .fb({Net_1598}),
 		  .io({tmpIO_0__inputPin_A_1_net[0:0]}),
 		  .siovref(tmpSIOVREF__inputPin_A_1_net),
 		  .interrupt({tmpINTERRUPT_0__inputPin_A_1_net[0:0]}),
@@ -924,7 +924,7 @@ module top ;
 		inputPin_B_1
 		 (.oe(tmpOE__inputPin_B_1_net),
 		  .y({1'b0}),
-		  .fb({Net_4}),
+		  .fb({Net_1597}),
 		  .io({tmpIO_0__inputPin_B_1_net[0:0]}),
 		  .siovref(tmpSIOVREF__inputPin_B_1_net),
 		  .interrupt({tmpINTERRUPT_0__inputPin_B_1_net[0:0]}),
@@ -938,7 +938,7 @@ module top ;
 	assign tmpOE__inputPin_B_1_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
 
 
-    assign Net_1596 = Net_1482 | Net_1483;
+    assign Net_1596 = Net_1482 | Net_1956;
 
 
 	cy_isr_v1_0
@@ -1036,18 +1036,18 @@ module top ;
     PWM_v3_30_1 PWM_1 (
         .reset(Net_276),
         .clock(Net_148),
-        .tc(Net_1171),
-        .pwm1(Net_1172),
-        .pwm2(Net_1173),
-        .interrupt(Net_1174),
+        .tc(Net_2002),
+        .pwm1(Net_2003),
+        .pwm2(Net_2004),
+        .interrupt(Net_2005),
         .capture(1'b0),
         .kill(Net_286),
         .enable(1'b1),
         .trigger(1'b0),
         .cmp_sel(1'b0),
         .pwm(Net_261),
-        .ph1(Net_1179),
-        .ph2(Net_1180));
+        .ph1(Net_2010),
+        .ph2(Net_2011));
     defparam PWM_1.Resolution = 8;
 
 
@@ -1055,11 +1055,11 @@ module top ;
 		#(.id("a7d66de8-6867-472a-a145-775aa573c41e"),
 		  .source_clock_id(""),
 		  .divisor(0),
-		  .period("1000000000000"),
+		  .period("400000000000"),
 		  .is_direct(0),
 		  .is_digital(1))
 		Clock_4
-		 (.clock_out(Net_1529));
+		 (.clock_out(Net_1699));
 
 
     assign Net_1482 = (Net_167[7:0] == Net_304[7:0]);
@@ -1077,14 +1077,14 @@ module top ;
 
 
     CyControlReg_v1_80 count_th_Reg_1 (
-        .control_1(Net_1401),
-        .control_2(Net_1402),
-        .control_3(Net_1403),
-        .control_0(Net_1404),
-        .control_4(Net_1405),
-        .control_5(Net_1406),
-        .control_6(Net_1407),
-        .control_7(Net_1408),
+        .control_1(Net_1831),
+        .control_2(Net_1832),
+        .control_3(Net_1833),
+        .control_0(Net_1834),
+        .control_4(Net_1835),
+        .control_5(Net_1836),
+        .control_6(Net_1837),
+        .control_7(Net_1838),
         .clock(1'b0),
         .reset(1'b0),
         .control_bus(Net_304[7:0]));
