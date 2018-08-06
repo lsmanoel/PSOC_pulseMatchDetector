@@ -1,7 +1,3 @@
-global global_serial_gui;
-global acumulador_global_1;
-global acumulador_global_1_n;
-
 EXIT_STATE = 0;
 START_STATE = 1;
 STANDBY_STATE = 2;
@@ -10,9 +6,11 @@ SCANOFF_STATE = 4;
 SAMPLER_STATE = 5;
 SETREGS_STATE = 6;
 
-acumulador_global_1 = 0;
-
-acumulador_global_1_n =1;
+global global_serial_gui;
+global global_serial_sizeBuffer;
+global global_serial_Channel_N;
+global global_serial_Channel_sizeBuffer;
+global global_serial_Channel_width;
 
 global_serial_gui=serial('COM8');
 
@@ -21,9 +19,13 @@ set(global_serial_gui, 'BaudRate', 57600);
 global_serial_gui.BytesAvailableFcnMode='byte';
 global_serial_gui.BytesAvailableFcn=@dataReadFcn;
 
-sizeBuffer=8;
-global_serial_gui.BytesAvailableFcnCount=sizeBuffer;
-global_serial_gui.InputBufferSize=sizeBuffer;
+global_serial_Channel_width = 2;
+global_serial_Channel_N = 3;
+global_serial_Channel_sizeBuffer = 4;
+global_serial_sizeBuffer = global_serial_Channel_N*global_serial_Channel_sizeBuffer*global_serial_Channel_width;
+
+global_serial_gui.BytesAvailableFcnCount=global_serial_sizeBuffer;
+global_serial_gui.InputBufferSize=global_serial_sizeBuffer;
 
 fclose(global_serial_gui);
 fopen(global_serial_gui);

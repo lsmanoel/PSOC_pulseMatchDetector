@@ -1,11 +1,4 @@
-/**
- * Simple Read
- * 
- * Read data from the serial port and change the color of a rectangle
- * when a switch connected to a Wiring or Arduino board is pressed and released.
- * This example works with the Wiring / Arduino program that follows below.
- */
-
+import org.quark.jasmine.*;
 import processing.serial.*;
 import interfascia.*;
 import lord_of_galaxy.timing_utils.*;
@@ -25,15 +18,10 @@ int count_th_Reg_1_value_int=255;
 int disp_mode;
 
 // -----------------------------------------------------------------------------
-//SERIAL CONFIG:
+//SERIAL CONFIG: INPUT
 Serial myPort;  // Create object from Serial class
 
 int scan_size = 6;
-int media_in, media_anterior, count_media_in = 0;
-int ac_1, ac_2, ac_3;
-
-String data_evi_str;
-  
 byte data_in[] = new byte[scan_size];      // Data received from the serial port
 int data_in_int[] = new int[scan_size]; 
 int count_data_in = 0;
@@ -41,6 +29,24 @@ int count_data_in = 0;
 boolean serial_ready;
 int serial_mode;
 
+// -----------------------------------------------------------------------------
+//FILE CONFIG: OUTPUT
+static final int  array_output_size = 16;
+int  array_output_n=0;
+
+float ac_1, ac_2, ac_3;
+float delta_ac_1, delta_ac_2, delta_ac_3;
+
+float ac_1_Array_output[] = new float[array_output_size];
+float delta_ac_1_output[] = new float[array_output_size];
+
+float ac_2_Array_output[] = new float[array_output_size];
+float delta_ac_2_output[] = new float[array_output_size];
+
+float ac_3_Array_output[] = new float[array_output_size];
+float delta_ac_3_output[] = new float[array_output_size];
+
+PrintWriter output_file;
 // -----------------------------------------------------------------------------
 // COMANDOS DE CONTROLE:
 char EXIT_STATE = '0' - 48;
@@ -50,6 +56,7 @@ char SCANON_STATE = '3' - 48;
 char SCANOFF_STATE = '4' - 48;
 char SAMPLER_STATE = '5' - 48;
 char SETREGS_STATE = '6' - 48; 
+
 
 void setup() 
 {  
@@ -105,12 +112,16 @@ void setup()
   // ISP SERIAL CONFIG -----------------------------------------------------------   
   myPort.clear();
   myPort.buffer(scan_size);//Ativar evento de serial
+  
+  //output_file = createWriter("output.txt");
 }
 
 void draw()
 {   
     if(serial_ready)
-    {      
+    {
+      serial_ready = false;
+      
       background(255);
       
       textSize(20);
@@ -154,28 +165,59 @@ void draw()
       //----------------------------------------------------
       fill(0);
       text(ac_1, 30 + 240, 250);
-      float delta_ac_1 = float(ac_1)/float(timeNow);
+      float delta_ac_1 = ac_1/float(timeNow);
       text(delta_ac_1, 30+260, 250+30); 
       
       text(ac_2, 30 + 240, 250+100);
-      float delta_ac_2 = float(ac_2)/float(timeNow);
+      float delta_ac_2 = ac_2/float(timeNow);
       text(delta_ac_2, 30 + 260, 250+30+100); 
       
       text(ac_3, 30 + 240, 250+200);
-      float delta_ac_3 = float(ac_3)/float(timeNow);
+      float delta_ac_3 = ac_3/float(timeNow);
       text(delta_ac_3, 30 + 260, 250+30+200); 
       
       textSize(15);
       fill(0);
       
+      text("Entrada 1:", 30+240, 225);
       text("fótons medidos", 30+400, 250+20);
       text("fótons/ms", 30+400, 250+30+20);
+      
+      text("Coincidências:", 30+240, 225+100);
       text("fótons medidos", 30+400, 250+20+100);
       text("fótons/ms", 30+400, 250+30+20+100);
+      
+      text("Entrada 2:", 30+240, 225+200);
       text("fótons medidos", 30+400, 250+20+200);
       text("fótons/ms", 30+400, 250+30+20+200);
       
-      serial_ready = false;
+      
+      ac_1_Array_output[array_output_n] = ac_1;
+      delta_ac_1_output[array_output_n] = delta_ac_1;
+      
+      ac_2_Array_output[array_output_n] = ac_2;
+      delta_ac_2_output[array_output_n] = delta_ac_2;
+      
+      ac_3_Array_output[array_output_n] = ac_3;
+      delta_ac_3_output[array_output_n] = delta_ac_3;
+      
+      
+      if(array_output_n < scan_size)
+      {
+        array_output_n = array_output_n +1;  
+      }
+      else
+      {
+        //output_file.print(ac_1);
+        //output_file.print(delta_ac_1);
+        //output_file.print(ac_2);
+        //output_file.print(delta_ac_2);
+        //output_file.print(ac_3);
+        //output_file.print(delta_ac_3);
+        //output_file.print("\n");
+        
+        array_output_n = 0;
+      }
     }
 }
 
@@ -218,6 +260,6 @@ void actionPerformed(GUIEvent e) {
   }
   else if (e.getSource() == saveData_button) 
   {
-    //saveBytes("output.dat", data_out);
+    //saveStream("output.dat", data_out);
   }
 }

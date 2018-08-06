@@ -1,6 +1,6 @@
 // ======================================================================
 // pulseDet_2.v generated from TopDesign.cysch
-// 08/02/2018 at 14:54
+// 08/05/2018 at 22:17
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -474,18 +474,19 @@ endmodule
 module top ;
 
           wire  preCount_1_overflow_sig;
+          wire  Net_14321;
+          wire  Net_14324;
           wire  Net_14170;
           wire  Net_14169;
           wire  Net_14168;
           wire  Net_14167;
           wire  Net_14166;
           wire  Net_14164;
+          wire  isr_match_sig;
           wire  Net_14163;
           wire  Net_14162;
-          wire  isr_match_sig;
           wire  Net_14161;
-          wire  Net_13816;
-          wire  Net_13745;
+          wire  Net_14304;
           wire  Net_11190;
           wire  Net_11189;
           wire  Net_11188;
@@ -495,9 +496,9 @@ module top ;
           wire  Net_11184;
           wire  Net_11183;
           wire  Net_11182;
+          wire  clk_alpha;
           wire  Net_11181;
           wire  Net_11180;
-          wire  clk_alpha;
           wire  Net_11179;
           wire  Net_11178;
           wire  Net_11177;
@@ -505,9 +506,9 @@ module top ;
           wire  Net_11175;
           wire  Net_11174;
           wire  Net_11173;
+          wire  enable_sig;
           wire  Net_14223;
           wire  Net_14222;
-          wire  enable_sig;
           wire  Net_14221;
           wire  Net_14220;
           wire  Net_14219;
@@ -518,16 +519,14 @@ module top ;
           wire  Net_11160;
           wire  Net_11159;
           wire  Net_11158;
+          wire  reset_sig;
           wire  Net_11157;
           wire  Net_11156;
-          wire  reset_sig;
           wire  Net_11155;
           wire  Net_11154;
           wire  Net_11153;
           wire  Net_11152;
           wire  Net_11151;
-          wire  Net_13819;
-          wire  Net_13821;
           wire  Net_327;
           wire  Net_13733;
           wire  Net_13732;
@@ -571,8 +570,8 @@ module top ;
           wire  Net_6101;
           wire  Net_6100;
           wire  Net_6099;
-          wire  resetCounter_2_sig;
           wire  Net_6098;
+          wire  resetCounter_2_sig;
           wire  Net_14159;
           wire  Net_14158;
           wire  Net_14157;
@@ -620,53 +619,56 @@ module top ;
           wire  Net_11132;
           wire  Net_11131;
           wire  Net_11130;
-          wire  match_sig;
           wire  Net_11149;
+          wire  match_sig;
           wire  Net_11148;
           wire  Net_11147;
-          wire  preCount_2_overflow_sig;
           wire  Net_11146;
+          wire  preCount_2_overflow_sig;
           wire  Net_11145;
           wire  Net_11144;
           wire  Net_11143;
           wire  Net_11142;
           wire  Net_11141;
           wire  Net_11140;
+          wire  Net_14326;
+          wire  Net_14325;
+          wire  Net_13767;
+          wire [7:0] Net_11122;
+          wire  Net_13811;
+          wire  Net_14299;
+          wire  Net_13823;
           wire  Net_14281;
           wire  Net_14284;
           wire [1:0] Net_14287;
           wire [1:0] Net_14288;
           wire  Net_14237;
+          wire  resetCounter_3_sig;
           wire [7:0] Net_4100;
           wire  Net_14241;
           wire  Net_14244;
           wire  Net_9073;
           wire  Net_14234;
-          wire  resetCounter_3_sig;
+          wire  resetCounter_1_sig;
           wire  Net_11886;
           wire [7:0] Net_14136;
           wire [7:0] Net_14102;
+          wire  preCount_3_overflow_sig;
           wire  Net_13817;
           wire [7:0] Net_13798;
-          wire  resetCounter_1_sig;
           wire  Net_13840;
           wire  Net_13779;
           wire  Net_6445;
-          wire  preCount_3_overflow_sig;
           wire [7:0] Net_14226;
           wire [7:0] Net_14053;
           wire [7:0] Net_14124;
           wire  Net_12309;
-          wire  Net_13767;
-          wire  Net_13823;
-          wire  Net_11443;
           wire [7:0] Net_11125;
           wire [7:0] Net_13789;
-          wire [7:0] Net_11122;
           wire [7:0] Net_14225;
           wire [7:0] Net_13793;
-          wire  Net_82;
           wire  Count_1_overflow_sig;
+          wire  Net_82;
           wire  Net_160;
           wire  Net_294;
           wire  Net_261;
@@ -674,15 +676,15 @@ module top ;
           wire  Net_276;
 
     EdgeDetect_v1_0 EdgeDetect_1 (
-        .d(Net_11443),
+        .d(Net_14299),
         .det(Net_11886),
-        .clock(clk_alpha));
+        .clock(Net_13811));
     defparam EdgeDetect_1.EdgeType = 0;
 
     EdgeDetect_v1_0 EdgeDetect_2 (
         .d(Net_13823),
         .det(Net_13817),
-        .clock(clk_alpha));
+        .clock(Net_13811));
     defparam EdgeDetect_2.EdgeType = 0;
 
     CyControlReg_v1_80 Count_th_Reg_2 (
@@ -750,11 +752,11 @@ module top ;
 
     assign Net_14241 = Net_11886 & Net_13817;
 
-	wire [0:0] tmpOE__Pin_3_net;
-	wire [0:0] tmpFB_0__Pin_3_net;
-	wire [0:0] tmpIO_0__Pin_3_net;
-	wire [0:0] tmpINTERRUPT_0__Pin_3_net;
-	electrical [0:0] tmpSIOVREF__Pin_3_net;
+	wire [0:0] tmpOE__PinLed_net;
+	wire [0:0] tmpFB_0__PinLed_net;
+	wire [0:0] tmpIO_0__PinLed_net;
+	wire [0:0] tmpINTERRUPT_0__PinLed_net;
+	electrical [0:0] tmpSIOVREF__PinLed_net;
 
 	cy_psoc3_pins_v1_10
 		#(.id("e851a3b9-efb8-48be-bbb8-b303b216c393"),
@@ -809,13 +811,13 @@ module top ;
 		  .ovt_needed(1'b0),
 		  .ovt_slew_control(2'b00),
 		  .input_buffer_sel(2'b00))
-		Pin_3
-		 (.oe(tmpOE__Pin_3_net),
+		PinLed
+		 (.oe(tmpOE__PinLed_net),
 		  .y({Net_261}),
-		  .fb({tmpFB_0__Pin_3_net[0:0]}),
-		  .io({tmpIO_0__Pin_3_net[0:0]}),
-		  .siovref(tmpSIOVREF__Pin_3_net),
-		  .interrupt({tmpINTERRUPT_0__Pin_3_net[0:0]}),
+		  .fb({tmpFB_0__PinLed_net[0:0]}),
+		  .io({tmpIO_0__PinLed_net[0:0]}),
+		  .siovref(tmpSIOVREF__PinLed_net),
+		  .interrupt({tmpINTERRUPT_0__PinLed_net[0:0]}),
 		  .in_clock({1'b0}),
 		  .in_clock_en({1'b1}),
 		  .in_reset({1'b0}),
@@ -823,7 +825,7 @@ module top ;
 		  .out_clock_en({1'b1}),
 		  .out_reset({1'b0}));
 
-	assign tmpOE__Pin_3_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
+	assign tmpOE__PinLed_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
 
     assign Count_1_overflow_sig = (Net_14225[7:0] == Net_13798[7:0]);
 
@@ -1214,7 +1216,7 @@ module top ;
 
 	cy_clock_v1_0
 		#(.id("6abca99c-174d-4623-805d-942a9fd1cd18"),
-		  .source_clock_id("CEF43CFB-0213-49b9-B980-2FFAB81C5B47"),
+		  .source_clock_id("61737EF6-3B74-48f9-8B91-F7473A442AE7"),
 		  .divisor(1),
 		  .period("0"),
 		  .is_direct(0),
@@ -1327,7 +1329,7 @@ module top ;
 		  .slew_rate(1'b0),
 		  .spanning(0),
 		  .use_annotation(1'b0),
-		  .vtrip(2'b00),
+		  .vtrip(2'b01),
 		  .width(1),
 		  .ovt_hyst_trim(1'b0),
 		  .ovt_needed(1'b0),
@@ -1336,7 +1338,7 @@ module top ;
 		inputPin_B_1
 		 (.oe(tmpOE__inputPin_B_1_net),
 		  .y({1'b0}),
-		  .fb({Net_13821}),
+		  .fb({Net_13823}),
 		  .io({tmpIO_0__inputPin_B_1_net[0:0]}),
 		  .siovref(tmpSIOVREF__inputPin_B_1_net),
 		  .interrupt({tmpINTERRUPT_0__inputPin_B_1_net[0:0]}),
@@ -1401,7 +1403,7 @@ module top ;
 		  .slew_rate(1'b0),
 		  .spanning(0),
 		  .use_annotation(1'b0),
-		  .vtrip(2'b00),
+		  .vtrip(2'b01),
 		  .width(1),
 		  .ovt_hyst_trim(1'b0),
 		  .ovt_needed(1'b0),
@@ -1410,7 +1412,7 @@ module top ;
 		inputPin_A_1
 		 (.oe(tmpOE__inputPin_A_1_net),
 		  .y({1'b0}),
-		  .fb({Net_13819}),
+		  .fb({Net_14299}),
 		  .io({tmpIO_0__inputPin_A_1_net[0:0]}),
 		  .siovref(tmpSIOVREF__inputPin_A_1_net),
 		  .interrupt({tmpINTERRUPT_0__inputPin_A_1_net[0:0]}),
@@ -1545,31 +1547,94 @@ module top ;
 
     assign Net_6445 = preCount_2_overflow_sig ^ isr_match_sig;
 
+	wire [0:0] tmpOE__Pin_1_net;
+	wire [0:0] tmpFB_0__Pin_1_net;
+	wire [0:0] tmpIO_0__Pin_1_net;
+	wire [0:0] tmpINTERRUPT_0__Pin_1_net;
+	electrical [0:0] tmpSIOVREF__Pin_1_net;
 
-	cy_clock_v1_0
-		#(.id("aba0c180-1972-40de-a14a-eefb47f416c7"),
-		  .source_clock_id(""),
-		  .divisor(0),
-		  .period("1000000000"),
-		  .is_direct(0),
-		  .is_digital(1))
-		Clock_2
-		 (.clock_out(Net_11443));
+	cy_psoc3_pins_v1_10
+		#(.id("d833bbb1-b93f-4e95-8e30-e7d16feaface"),
+		  .drive_mode(3'b110),
+		  .ibuf_enabled(1'b1),
+		  .init_dr_st(1'b0),
+		  .input_clk_en(0),
+		  .input_sync(1'b1),
+		  .input_sync_mode(1'b0),
+		  .intr_mode(2'b00),
+		  .invert_in_clock(0),
+		  .invert_in_clock_en(0),
+		  .invert_in_reset(0),
+		  .invert_out_clock(0),
+		  .invert_out_clock_en(0),
+		  .invert_out_reset(0),
+		  .io_voltage(""),
+		  .layout_mode("CONTIGUOUS"),
+		  .oe_conn(1'b0),
+		  .oe_reset(0),
+		  .oe_sync(1'b0),
+		  .output_clk_en(0),
+		  .output_clock_mode(1'b0),
+		  .output_conn(1'b1),
+		  .output_mode(1'b0),
+		  .output_reset(0),
+		  .output_sync(1'b0),
+		  .pa_in_clock(-1),
+		  .pa_in_clock_en(-1),
+		  .pa_in_reset(-1),
+		  .pa_out_clock(-1),
+		  .pa_out_clock_en(-1),
+		  .pa_out_reset(-1),
+		  .pin_aliases(""),
+		  .pin_mode("O"),
+		  .por_state(4),
+		  .sio_group_cnt(0),
+		  .sio_hyst(1'b1),
+		  .sio_ibuf(""),
+		  .sio_info(2'b00),
+		  .sio_obuf(""),
+		  .sio_refsel(""),
+		  .sio_vtrip(""),
+		  .sio_hifreq(""),
+		  .sio_vohsel(""),
+		  .slew_rate(1'b0),
+		  .spanning(0),
+		  .use_annotation(1'b0),
+		  .vtrip(2'b10),
+		  .width(1),
+		  .ovt_hyst_trim(1'b0),
+		  .ovt_needed(1'b0),
+		  .ovt_slew_control(2'b00),
+		  .input_buffer_sel(2'b00))
+		Pin_1
+		 (.oe(tmpOE__Pin_1_net),
+		  .y({Net_14326}),
+		  .fb({tmpFB_0__Pin_1_net[0:0]}),
+		  .io({tmpIO_0__Pin_1_net[0:0]}),
+		  .siovref(tmpSIOVREF__Pin_1_net),
+		  .interrupt({tmpINTERRUPT_0__Pin_1_net[0:0]}),
+		  .in_clock({1'b0}),
+		  .in_clock_en({1'b1}),
+		  .in_reset({1'b0}),
+		  .out_clock({1'b0}),
+		  .out_clock_en({1'b1}),
+		  .out_reset({1'b0}));
 
+	assign tmpOE__Pin_1_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
 
 
     assign match_sig = Count_1_overflow_sig | Net_13767 | Net_12309;
 
 
 	cy_clock_v1_0
-		#(.id("187f184e-caa5-4c67-aebe-1dbba8a91bf4"),
+		#(.id("2e34c1ce-8772-4543-b4b8-9b7ec89b50af"),
 		  .source_clock_id(""),
 		  .divisor(0),
-		  .period("1666666666.66667"),
+		  .period("83333333.3333333"),
 		  .is_direct(0),
 		  .is_digital(1))
-		Clock_3
-		 (.clock_out(Net_13823));
+		Clock_2
+		 (.clock_out(Net_13811));
 
 
     CyStatusReg_v1_90 preCounter_Reg_3 (
@@ -1612,6 +1677,105 @@ module top ;
 
 
     assign Net_10608 = Net_14241 ^ isr_match_sig;
+
+	wire [0:0] tmpOE__Pin_2_net;
+	wire [0:0] tmpFB_0__Pin_2_net;
+	wire [0:0] tmpIO_0__Pin_2_net;
+	wire [0:0] tmpINTERRUPT_0__Pin_2_net;
+	electrical [0:0] tmpSIOVREF__Pin_2_net;
+
+	cy_psoc3_pins_v1_10
+		#(.id("d6f925af-c06b-486d-ad31-efb38e94daf7"),
+		  .drive_mode(3'b110),
+		  .ibuf_enabled(1'b1),
+		  .init_dr_st(1'b0),
+		  .input_clk_en(0),
+		  .input_sync(1'b1),
+		  .input_sync_mode(1'b0),
+		  .intr_mode(2'b00),
+		  .invert_in_clock(0),
+		  .invert_in_clock_en(0),
+		  .invert_in_reset(0),
+		  .invert_out_clock(0),
+		  .invert_out_clock_en(0),
+		  .invert_out_reset(0),
+		  .io_voltage(""),
+		  .layout_mode("CONTIGUOUS"),
+		  .oe_conn(1'b0),
+		  .oe_reset(0),
+		  .oe_sync(1'b0),
+		  .output_clk_en(0),
+		  .output_clock_mode(1'b0),
+		  .output_conn(1'b1),
+		  .output_mode(1'b0),
+		  .output_reset(0),
+		  .output_sync(1'b0),
+		  .pa_in_clock(-1),
+		  .pa_in_clock_en(-1),
+		  .pa_in_reset(-1),
+		  .pa_out_clock(-1),
+		  .pa_out_clock_en(-1),
+		  .pa_out_reset(-1),
+		  .pin_aliases(""),
+		  .pin_mode("O"),
+		  .por_state(4),
+		  .sio_group_cnt(0),
+		  .sio_hyst(1'b1),
+		  .sio_ibuf(""),
+		  .sio_info(2'b00),
+		  .sio_obuf(""),
+		  .sio_refsel(""),
+		  .sio_vtrip(""),
+		  .sio_hifreq(""),
+		  .sio_vohsel(""),
+		  .slew_rate(1'b0),
+		  .spanning(0),
+		  .use_annotation(1'b0),
+		  .vtrip(2'b10),
+		  .width(1),
+		  .ovt_hyst_trim(1'b0),
+		  .ovt_needed(1'b0),
+		  .ovt_slew_control(2'b00),
+		  .input_buffer_sel(2'b00))
+		Pin_2
+		 (.oe(tmpOE__Pin_2_net),
+		  .y({Net_14325}),
+		  .fb({tmpFB_0__Pin_2_net[0:0]}),
+		  .io({tmpIO_0__Pin_2_net[0:0]}),
+		  .siovref(tmpSIOVREF__Pin_2_net),
+		  .interrupt({tmpINTERRUPT_0__Pin_2_net[0:0]}),
+		  .in_clock({1'b0}),
+		  .in_clock_en({1'b1}),
+		  .in_reset({1'b0}),
+		  .out_clock({1'b0}),
+		  .out_clock_en({1'b1}),
+		  .out_reset({1'b0}));
+
+	assign tmpOE__Pin_2_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
+
+
+	cy_clock_v1_0
+		#(.id("f9f1e49a-4157-4a7f-b167-199917dd50f2"),
+		  .source_clock_id(""),
+		  .divisor(0),
+		  .period("1111111111.11111"),
+		  .is_direct(0),
+		  .is_digital(1))
+		Clock_3
+		 (.clock_out(Net_14325));
+
+
+
+	cy_clock_v1_0
+		#(.id("b901b6ff-3de3-406f-8a67-b0bf76b28e81"),
+		  .source_clock_id(""),
+		  .divisor(0),
+		  .period("1000000000"),
+		  .is_direct(0),
+		  .is_digital(1))
+		Clock_6
+		 (.clock_out(Net_14326));
+
 
 
 

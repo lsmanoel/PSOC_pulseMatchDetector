@@ -429,6 +429,142 @@ library (timing) {
             }
         }
     }
+    cell (iocell6) {
+        pin (in_clock) {
+            direction : input;
+            clock : true;
+        }
+        pin (in_clock_en) {
+            direction : input;
+        }
+        pin (in_reset) {
+            direction : input;
+        }
+        pin (out_clock) {
+            direction : input;
+            clock : true;
+        }
+        pin (out_clock_en) {
+            direction : input;
+        }
+        pin (out_reset) {
+            direction : input;
+        }
+        pin (pin_input) {
+            direction : input;
+        }
+        pin (pa_out) {
+            direction : output;
+        }
+        pin (oe) {
+            direction : input;
+        }
+        pin (pad_in) {
+            direction : input;
+        }
+        pin (pad_out) {
+            direction : output;
+            timing () {
+                timing_sense : negative_unate;
+                timing_type : three_state_disable;
+                related_pin : "oe";
+                intrinsic_rise : 17.434;
+                intrinsic_fall : 17.434;
+            }
+            timing () {
+                timing_sense : positive_unate;
+                timing_type : three_state_enable;
+                related_pin : "oe";
+                intrinsic_rise : 17.434;
+                intrinsic_fall : 17.434;
+            }
+            timing () {
+                timing_sense : positive_unate;
+                timing_type : combinational;
+                related_pin : "pin_input";
+                intrinsic_rise : 15.802;
+                intrinsic_fall : 15.802;
+            }
+        }
+        pin (fb) {
+            direction : output;
+            timing () {
+                timing_sense : positive_unate;
+                timing_type : combinational;
+                related_pin : "pad_in";
+                intrinsic_rise : 7.962;
+                intrinsic_fall : 7.962;
+            }
+        }
+    }
+    cell (iocell7) {
+        pin (in_clock) {
+            direction : input;
+            clock : true;
+        }
+        pin (in_clock_en) {
+            direction : input;
+        }
+        pin (in_reset) {
+            direction : input;
+        }
+        pin (out_clock) {
+            direction : input;
+            clock : true;
+        }
+        pin (out_clock_en) {
+            direction : input;
+        }
+        pin (out_reset) {
+            direction : input;
+        }
+        pin (pin_input) {
+            direction : input;
+        }
+        pin (pa_out) {
+            direction : output;
+        }
+        pin (oe) {
+            direction : input;
+        }
+        pin (pad_in) {
+            direction : input;
+        }
+        pin (pad_out) {
+            direction : output;
+            timing () {
+                timing_sense : negative_unate;
+                timing_type : three_state_disable;
+                related_pin : "oe";
+                intrinsic_rise : 17.182;
+                intrinsic_fall : 17.182;
+            }
+            timing () {
+                timing_sense : positive_unate;
+                timing_type : three_state_enable;
+                related_pin : "oe";
+                intrinsic_rise : 17.182;
+                intrinsic_fall : 17.182;
+            }
+            timing () {
+                timing_sense : positive_unate;
+                timing_type : combinational;
+                related_pin : "pin_input";
+                intrinsic_rise : 15.023;
+                intrinsic_fall : 15.023;
+            }
+        }
+        pin (fb) {
+            direction : output;
+            timing () {
+                timing_sense : positive_unate;
+                timing_type : combinational;
+                related_pin : "pad_in";
+                intrinsic_rise : 8.264;
+                intrinsic_fall : 8.264;
+            }
+        }
+    }
     cell (macrocell2) {
         pin (cin) {
             direction : input;
@@ -2522,7 +2658,7 @@ library (timing) {
         }
         pin (q) {
             direction : output;
-            function : "((!main_0 * !main_1 * main_2) + (main_0 * main_1) + (main_1 * !main_2)) ^ 0";
+            function : "((!main_0 * main_1 * !main_2) + (main_0 * main_2) + (!main_1 * main_2)) ^ 0";
             timing () {
                 timing_type : combinational;
                 related_pin : "main_0 main_1 main_2 main_3 main_4 main_5 main_6 main_7 main_8 main_9 main_10 main_11";
@@ -2532,7 +2668,7 @@ library (timing) {
         }
         pin (q_fixed) {
             direction : output;
-            function : "((!main_0 * !main_1 * main_2) + (main_0 * main_1) + (main_1 * !main_2)) ^ 0";
+            function : "((!main_0 * main_1 * !main_2) + (main_0 * main_2) + (!main_1 * main_2)) ^ 0";
             timing () {
                 timing_type : combinational;
                 related_pin : "main_0 main_1 main_2 main_3 main_4 main_5 main_6 main_7 main_8 main_9 main_10 main_11";
@@ -2610,7 +2746,7 @@ library (timing) {
         }
         pin (q) {
             direction : output;
-            function : "((!main_0 * !main_1 * main_2) + (main_0 * main_1) + (main_1 * !main_2)) ^ 0";
+            function : "((!main_0 * main_1 * !main_2) + (main_0 * main_2) + (!main_1 * main_2)) ^ 0";
             timing () {
                 timing_type : combinational;
                 related_pin : "main_0 main_1 main_2 main_3 main_4 main_5 main_6 main_7 main_8 main_9 main_10 main_11";
@@ -2620,7 +2756,7 @@ library (timing) {
         }
         pin (q_fixed) {
             direction : output;
-            function : "((!main_0 * !main_1 * main_2) + (main_0 * main_1) + (main_1 * !main_2)) ^ 0";
+            function : "((!main_0 * main_1 * !main_2) + (main_0 * main_2) + (!main_1 * main_2)) ^ 0";
             timing () {
                 timing_type : combinational;
                 related_pin : "main_0 main_1 main_2 main_3 main_4 main_5 main_6 main_7 main_8 main_9 main_10 main_11";
@@ -2698,7 +2834,7 @@ library (timing) {
         }
         pin (q) {
             direction : output;
-            function : "((!main_0 * !main_1 * !main_2 * main_3 * main_4) + (main_0 * main_2) + (main_1 * main_2) + (main_2 * !main_3) + (main_2 * !main_4)) ^ 0";
+            function : "((!main_0 * main_1 * !main_2 * main_3 * !main_4) + (main_0 * main_4) + (!main_1 * main_4) + (main_2 * main_4) + (!main_3 * main_4)) ^ 0";
             timing () {
                 timing_type : combinational;
                 related_pin : "main_0 main_1 main_2 main_3 main_4 main_5 main_6 main_7 main_8 main_9 main_10 main_11";
@@ -2708,7 +2844,7 @@ library (timing) {
         }
         pin (q_fixed) {
             direction : output;
-            function : "((!main_0 * !main_1 * !main_2 * main_3 * main_4) + (main_0 * main_2) + (main_1 * main_2) + (main_2 * !main_3) + (main_2 * !main_4)) ^ 0";
+            function : "((!main_0 * main_1 * !main_2 * main_3 * !main_4) + (main_0 * main_4) + (!main_1 * main_4) + (main_2 * main_4) + (!main_3 * main_4)) ^ 0";
             timing () {
                 timing_type : combinational;
                 related_pin : "main_0 main_1 main_2 main_3 main_4 main_5 main_6 main_7 main_8 main_9 main_10 main_11";

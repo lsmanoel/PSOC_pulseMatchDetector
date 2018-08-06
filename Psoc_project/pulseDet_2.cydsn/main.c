@@ -109,7 +109,7 @@ void start_state_process()//1
  
     Count_th_Reg_1_Write(255);
     Count_th_Reg_2_Write(255);
-    Count_th_Reg_3_Write(100);
+    Count_th_Reg_3_Write(255);
     
     Control_Reg_1_Write(OFF_COMMAND);
     //Control_Reg_1_Write(RESET_COMMAND);

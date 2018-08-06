@@ -60,9 +60,6 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\cydisabledsheets.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Clock_1.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Clock_1.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Pin_3_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Pin_3.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Pin_3.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\isr_match.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\isr_match.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\preCounter_Reg_2.c</File>
@@ -157,6 +154,17 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Count_th_Reg_3_PM.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Clock_4.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Clock_4.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Clock_6.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Clock_6.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Pin_1_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Pin_1.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Pin_1.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Pin_2_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Pin_2.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Pin_2.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\PinLed_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\PinLed.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\PinLed.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\Users\lucas\Google Drive (lucas.s10@aluno.ifsc.edu.br)\ifsc\bolsa\pulseDet\PSOC_pulseMatchDetector\Psoc_project\pulseDet_2.cydsn\Export\ARM_GCC_Generic">
