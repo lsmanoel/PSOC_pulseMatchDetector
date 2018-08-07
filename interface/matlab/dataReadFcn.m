@@ -4,7 +4,7 @@ function dataReadFcn(obj, event)
     
     global acumulador_global_n;   
     
-    global global_serial_gui;
+    global global_serial;
     global global_serial_sizeBuffer;
     global global_serial_Channel_N;
     global global_serial_Channel_sizeBuffer;
@@ -26,7 +26,7 @@ function dataReadFcn(obj, event)
     global windowSize;
     global input;
     
-    input = fread(global_serial_gui);
+    input = fread(global_serial);
     
     elps_time = etime(t2,t_inicial); 
        

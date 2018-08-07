@@ -21,7 +21,7 @@ global_serial_gui.BytesAvailableFcn=@dataReadFcn;
 
 global_serial_Channel_width = 2;
 global_serial_Channel_N = 3;
-global_serial_Channel_sizeBuffer = 4;
+global_serial_Channel_sizeBuffer = 2;
 global_serial_sizeBuffer = global_serial_Channel_N*global_serial_Channel_sizeBuffer*global_serial_Channel_width;
 
 global_serial_gui.BytesAvailableFcnCount=global_serial_sizeBuffer;

@@ -292,7 +292,18 @@
 </userData>
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
-<OpenDocs />
+<OpenDocs>
+<name v=".\TopDesign\TopDesign.cysch" />
+<name v=".\main.c" />
+<name v=".\pulseDet_2.cydwr" />
+</OpenDocs>
+<OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
+
+  Actipro Docking/MDI for WinForms
+  Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
+  http://www.actiprosoftware.com
+
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Vertical"><TabbedMdiContainer Size="1170, 915" SelectedTabbedMdiWindow="8e7a1b72-ecaa-4650-b0b2-13a8dfd270d0"><DocumentWindow Key="C:\Users\lucas\Google Drive (lucas.s10@aluno.ifsc.edu.br)\ifsc\bolsa\pulseDet\PSOC_pulseMatchDetector\Psoc_project\pulseDet_2.cydsn\TopDesign\TopDesign.cysch" Guid="8e7a1b72-ecaa-4650-b0b2-13a8dfd270d0" /><DocumentWindow Key="C:\Users\lucas\Google Drive (lucas.s10@aluno.ifsc.edu.br)\ifsc\bolsa\pulseDet\PSOC_pulseMatchDetector\Psoc_project\pulseDet_2.cydsn\main.c" Guid="693cd2b1-97fb-4ab2-b4ce-4056cbe8abcb" /><DocumentWindow Key="C:\Users\lucas\Google Drive (lucas.s10@aluno.ifsc.edu.br)\ifsc\bolsa\pulseDet\PSOC_pulseMatchDetector\Psoc_project\pulseDet_2.cydsn\pulseDet_2.cydwr" Guid="e1a217b6-5891-40a4-a49d-4a5288d6415f" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

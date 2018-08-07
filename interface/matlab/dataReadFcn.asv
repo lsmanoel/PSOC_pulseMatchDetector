@@ -4,7 +4,7 @@ function dataReadFcn(obj, event)
     
     global acumulador_global_n;   
     
-    global global_serial_gui;
+    global global_serial;
     global global_serial_sizeBuffer;
     global global_serial_Channel_N;
     global global_serial_Channel_sizeBuffer;
@@ -24,19 +24,16 @@ function dataReadFcn(obj, event)
     
     global t_inicial;
     global windowSize;
+    global input;
     
     input = fread(global_serial_gui);
     
     elps_time = etime(t2,t_inicial); 
        
     for i=1:global_serial_Channel_sizeBuffer 
-        acumulador_det_1_global=acumulador_det_1_global + 255*input(4)+input(1);
-        acumulador_det_2_global=acumulador_det_2_global + 255*input(5)+input(2);
-        acumulador_match_global=acumulador_match_global + 255*input(6)+input(3);
-        
-        acumulador_det_1_global=acumulador_det_1_global + 255*input(10)+input(7);
-        acumulador_det_2_global=acumulador_det_2_global + 255*input(11)+input(8);
-        acumulador_match_global=acumulador_match_global + 255*input(12)+input(9);
+        acumulador_det_1_global=acumulador_det_1_global + 255*input(4 + (i-1)*global_serial_Channel_N*global_serial_Channel_width)+input(1 + (i-1)*global_serial_Channel_N*global_serial_Channel_width);
+        acumulador_det_2_global=acumulador_det_2_global + 255*input(5 + (i-1)*global_serial_Channel_N*global_serial_Channel_width)+input(2 + (i-1)*global_serial_Channel_N*global_serial_Channel_width);
+        acumulador_match_global=acumulador_match_global + 255*input(6 + (i-1)*global_serial_Channel_N*global_serial_Channel_width)+input(3 + (i-1)*global_serial_Channel_N*global_serial_Channel_width);       
     end 
     
     acumulador_det_1_global_array(acumulador_global_n)=acumulador_det_1_global;
@@ -71,9 +68,10 @@ function dataReadFcn(obj, event)
 %   plot(acumulador_det_2_global_array);
 %   plot(acumulador_match_global_array)
     
-%     disp(acumulador_det_1_global/elps_time);
-%     disp(acumulador_det_2_global/elps_time);
-%     disp(acumulador_match_global/elps_time);
+    clc
+    disp(acumulador_det_1_global/elps_time);
+    disp(acumulador_det_2_global/elps_time);
+    disp(acumulador_match_global/elps_time);
 
     acumulador_global_n = acumulador_global_n + 1;
 end
